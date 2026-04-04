@@ -1,0 +1,484 @@
+{
+  "bootstrap": {
+    "status": "Frontend baseline ready for slice 01",
+    "eyebrow": "Auth + identity",
+    "title": "Frontend foundation aligned with TracAuto v2.",
+    "description": "This bootstrap enables the common frontend stack: visual tokens, i18n, React Query, centralized HTTP client and folder structure for the access and context features.",
+    "sidebarEyebrow": "Technical baseline",
+    "sidebarTitle": "Active configuration",
+    "sidebarDescription": "This screen exists to validate that the slice 01 scaffold starts with the right architecture before building login, sign-up, context selector and refresh flows.",
+    "sidebar": {
+      "baseUrl": {
+        "label": "Access API"
+      },
+      "locale": {
+        "label": "Default locale"
+      },
+      "runtime": {
+        "label": "Runtime"
+      }
+    },
+    "capabilities": {
+      "session": {
+        "title": "Decoupled session",
+        "body": "The axios client injects the JWT from a session bridge and prepares automatic refresh through an HttpOnly cookie."
+      },
+      "context": {
+        "title": "Multi-org context",
+        "body": "The structure separates auth, context and shell so the app can respect the Session Snapshot and organization selector flow."
+      },
+      "i18n": {
+        "title": "i18n from the first commit",
+        "body": "All bootstrap copy lives in i18next with es-AR as the initial language and a controlled fallback."
+      },
+      "layers": {
+        "title": "Layers ready to grow",
+        "body": "Features, stores, services, shared and modules are prepared to follow the backend standard without mixing responsibilities."
+      }
+    },
+    "structure": {
+      "title": "Active layers",
+      "app": "Bootstrap, providers, routing and shells",
+      "features": "Auth/context features by workflow",
+      "services": "HTTP, contracts, adapters and session helpers",
+      "stores": "Minimal global state with Zustand",
+      "modules": "Future business modules",
+      "shared": "UI, i18n, hooks, forms, errors and utilities"
+    }
+  },
+  "common": {
+    "loading": "Loading...",
+    "brandPlatform": "web platform"
+  },
+  "landing": {
+    "nav": {
+      "features": "Features",
+      "plans": "Plans",
+      "contact": "Contact",
+      "login": "Sign in",
+      "cta": "Start free",
+      "menu": "Menu",
+      "close": "Close"
+    },
+    "hero": {
+      "badge": "Leading vehicle management platform",
+      "titleLine1": "Your entire vehicle ecosystem.",
+      "titleLine2": "One single platform.",
+      "subtitle": "Manage fleets, workshops, insurance, rentals and more. Or simply track your personal car. All connected, all in real time.",
+      "cta": "Start free",
+      "ctaSecondary": "See features",
+      "mock": {
+        "title": "Live dashboard",
+        "active": "Active",
+        "workshop": "In workshop",
+        "uptime": "Uptime"
+      }
+    },
+    "logos": {
+      "label": "They trust us",
+      "items": ["FleetCorp", "AutoSur", "TallerPro", "SeguroTotal", "TransLogic", "MobiDrive"]
+    },
+    "modules": {
+      "title": "Everything your company needs",
+      "subtitle": "Specialized modules for every vertical in the vehicle ecosystem. Activate only the ones you need.",
+      "cta": "Register my company",
+      "items": {
+        "flota": { "title": "Fleet Management", "desc": "Complete vehicle, driver, route and preventive maintenance management." },
+        "concesionaria": { "title": "Dealership", "desc": "Stock, sales, CRM and after-sales integrated in one platform." },
+        "taller": { "title": "Workshop", "desc": "Work orders, parts, online appointments and automated invoicing." },
+        "seguros": { "title": "Insurance", "desc": "Policies, claims, inspections and comprehensive coverage tracking." },
+        "alquileres": { "title": "Rentals", "desc": "Availability, contracts, returns and real-time control." },
+        "movilidad": { "title": "Mobility", "desc": "Trips, drivers, passengers — Uber-like management for your operation." },
+        "delivery": { "title": "Delivery", "desc": "Deliveries, optimized routes and live tracking for last mile." }
+      }
+    },
+    "b2c": {
+      "title": "Your car, always connected",
+      "subtitle": "Always know where your vehicle is. Get alerts. Control everything from your phone.",
+      "cta": "Create my free account",
+      "mock": {
+        "engineOn": "Engine on",
+        "location": "1234 Corrientes Ave.",
+        "speedValue": "42 km/h",
+        "speedLabel": "Current speed",
+        "batteryValue": "Battery 78%",
+        "batteryLabel": "GPS status"
+      },
+      "features": {
+        "gps": { "title": "Real-time GPS tracking", "desc": "Exact location of your vehicle, updated every 10 seconds." },
+        "alerts": { "title": "Smart alerts", "desc": "Movement, speed, geofences — instant push notifications." },
+        "history": { "title": "Trip history", "desc": "Review all trips and routes with stop and speed details." },
+        "status": { "title": "Vehicle status", "desc": "Mileage, engine, battery and diagnostics from the app." }
+      }
+    },
+    "steps": {
+      "title": "Get started in 3 steps",
+      "subtitle": "From zero to live tracking in less than 5 minutes.",
+      "items": [
+        { "title": "Sign up", "desc": "Create your account in less than 2 minutes. No credit card required." },
+        { "title": "Connect", "desc": "Add your vehicles and GPS devices to the platform." },
+        { "title": "Monitor", "desc": "Monitor everything from a single platform, in real time." }
+      ]
+    },
+    "pricing": {
+      "title": "Plans for every need",
+      "subtitle": "Start free and scale when you need to.",
+      "popular": "Popular",
+      "perMonth": " /month",
+      "plans": {
+        "personal": {
+          "name": "Personal",
+          "price": "Free",
+          "desc": "Ideal for tracking your personal vehicle.",
+          "features": ["1 vehicle", "Real-time GPS tracking", "Basic alerts", "30-day history"],
+          "cta": "Get started"
+        },
+        "profesional": {
+          "name": "Professional",
+          "price": "$29.990",
+          "desc": "For small fleets and growing businesses.",
+          "features": ["Up to 10 vehicles", "2 modules included", "Advanced reports", "Unlimited history", "5 users"],
+          "cta": "Get started"
+        },
+        "enterprise": {
+          "name": "Enterprise",
+          "price": "Custom",
+          "desc": "For large operations with specific needs.",
+          "features": ["Unlimited vehicles", "All modules", "API & integrations", "Dedicated support", "Guaranteed SLA"],
+          "cta": "Contact sales"
+        }
+      }
+    },
+    "testimonials": {
+      "title": "What our users say",
+      "items": [
+        { "quote": "Since we implemented TracAuto, we reduced fuel costs by 30%. Real-time visibility changed our operation.", "name": "Carlos Mendez", "role": "Dir. of Operations, TransLogic" },
+        { "quote": "Claims management improved drastically. We have all vehicle information instantly, without calling the insured.", "name": "Laura Peralta", "role": "Insurance Manager, AsegurAR" },
+        { "quote": "I control my car from my phone. It notifies me if someone moves it. Simple, fast and gives me peace of mind every day.", "name": "Martin Garcia", "role": "Individual user" }
+      ]
+    },
+    "cta": {
+      "title": "Start today. It's free.",
+      "subtitle": "No credit card. No commitment. Cancel anytime.",
+      "ctaPersonal": "Create my account",
+      "ctaEmpresa": "Are you a company? Register your organization"
+    },
+    "footer": {
+      "brandDesc": "Comprehensive vehicle management, telemetry and GPS tracking platform for businesses and individuals.",
+      "copyright": "© 2026 TracAuto. All rights reserved.",
+      "product": { "title": "Product", "features": "Features", "plans": "Plans", "integrations": "Integrations", "api": "API" },
+      "company": { "title": "Company", "about": "About us", "blog": "Blog", "contact": "Contact", "careers": "Careers" },
+      "legal": { "title": "Legal", "terms": "Terms of service", "privacy": "Privacy", "cookies": "Cookies" }
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Sign in",
+      "subtitle": "Enter your email and password",
+      "emailLabel": "Email",
+      "emailPlaceholder": "you@email.com",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "Your password",
+      "submit": "Sign in",
+      "recoveryPending": "Password recovery will be available in a future iteration.",
+      "socialDivider": "or continue with",
+      "googleCta": "Continue with Google",
+      "googleUnavailable": "Google sign-in is not enabled in this slice yet.",
+      "noAccount": "Don't have an account?",
+      "createAccount": "Create account",
+      "registerCompany": "Register a company"
+    },
+    "errors": {
+      "emailRequired": "Email is required",
+      "emailInvalid": "Invalid email format",
+      "passwordRequired": "Password is required",
+      "passwordMinLength": "Password must be at least 8 characters",
+      "passwordUppercase": "Password must contain at least one uppercase letter",
+      "passwordDigit": "Password must contain at least one number",
+      "confirmPasswordRequired": "Please confirm your password",
+      "passwordMismatch": "Passwords do not match",
+      "docTypeRequired": "Document type is required",
+      "docNumberRequired": "Document number is required",
+      "nombreRequired": "First name is required",
+      "apellidoRequired": "Last name is required",
+      "empresaNombreRequired": "Company name is required",
+      "empresaCuitRequired": "CUIT is required",
+      "empresaCuitInvalid": "Invalid CUIT format (XX-XXXXXXXX-X)",
+      "modulosRequired": "Select at least one module"
+    },
+    "registro": {
+      "title": "Create account",
+      "continue": "Continue",
+      "back": "Back",
+      "submit": "Create my account",
+      "hasAccount": "Already have an account?",
+      "loginLink": "Sign in",
+      "emailLabel": "Email",
+      "docTypeLabel": "Type",
+      "docNumberLabel": "Document number",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "At least 8 characters",
+      "confirmPasswordLabel": "Confirm password",
+      "confirmPasswordPlaceholder": "Repeat your password",
+      "nombreLabel": "First name",
+      "apellidoLabel": "Last name",
+      "examples": {
+        "docNumber": "32,456,789",
+        "firstName": "John",
+        "lastName": "Garcia"
+      },
+      "docTypes": {
+        "dni": "DNI",
+        "cuit": "CUIT",
+        "passport": "Passport",
+        "other": "Other"
+      },
+      "step1": {
+        "title": "What's your email?",
+        "subtitle": "You'll use it to sign in and receive notifications."
+      },
+      "step2": {
+        "title": "Your identity document",
+        "subtitle": "We need to verify your identity to protect your account."
+      },
+      "step3": {
+        "title": "Create your password",
+        "subtitle": "Choose a secure password to protect your account."
+      },
+      "step4": {
+        "title": "What's your name?",
+        "subtitle": "Your name will appear on your profile and notifications."
+      },
+      "password": {
+        "strengthEmpty": "Enter your password",
+        "strengthWeak": "Weak",
+        "strengthFair": "Fair",
+        "strengthGood": "Good",
+        "strengthExcellent": "Excellent"
+      },
+      "success": {
+        "title": "Your account is ready!",
+        "subtitle": "You can now start using TracAuto to track and manage your vehicles.",
+        "cta": "Go to dashboard"
+      }
+    },
+    "registroEmpresa": {
+      "title": "Register company",
+      "submit": "Register company",
+      "emailLabel": "Corporate email",
+      "phoneLabel": "Phone",
+      "docLabel": "Document",
+      "empresaNombreLabel": "Company name",
+      "empresaCuitLabel": "Company CUIT",
+      "empresaRubroLabel": "Industry",
+      "examples": {
+        "firstName": "John",
+        "lastName": "Garcia",
+        "email": "john@yourcompany.com",
+        "phone": "+1 555 123 4567",
+        "docNumber": "32,456,789",
+        "companyName": "FleetCorp North America",
+        "companyCuit": "30-12345678-9"
+      },
+      "rubroPlaceholder": "Select an industry",
+      "rubros": {
+        "transporte": "Transport / Logistics",
+        "concesionaria": "Dealership",
+        "taller": "Mechanic workshop",
+        "seguros": "Insurance",
+        "alquiler": "Vehicle rental",
+        "delivery": "Delivery / Last mile",
+        "movilidad": "Mobility / Passenger transport",
+        "otro": "Other"
+      },
+      "step1": {
+        "title": "Your contact details",
+        "subtitle": "Enter the details of the person who will be the main administrator."
+      },
+      "step2": {
+        "title": "Create your password",
+        "subtitle": "Choose a secure password for your admin account."
+      },
+      "step3": {
+        "title": "Your company details",
+        "subtitle": "Tell us about your organization to set up the workspace."
+      },
+      "step4": {
+        "title": "Which modules do you need?",
+        "subtitle": "Select the modules for your company. You can change them later in settings."
+      },
+      "modules": {
+        "flota": "Fleet",
+        "concesionaria": "Dealership",
+        "taller": "Workshop",
+        "seguros": "Insurance",
+        "alquileres": "Rentals",
+        "movilidad": "Mobility",
+        "delivery": "Delivery"
+      },
+      "modulesDesc": {
+        "flota": "Vehicles, drivers, routes and maintenance",
+        "concesionaria": "Stock, sales, CRM and after-sales",
+        "taller": "Work orders, parts and appointments",
+        "seguros": "Policies, claims and inspections",
+        "alquileres": "Availability, contracts and control",
+        "movilidad": "Trips, drivers and passengers",
+        "delivery": "Deliveries, routes and live tracking"
+      },
+      "modulesSelected": "{{count}} module selected",
+      "modulesSelected_plural": "{{count}} modules selected",
+      "modulesMinNotice": "Select at least 1 module",
+      "success": {
+        "title": "Your company is ready!",
+        "subtitle": "We've created the workspace for your organization.",
+        "inviteHint": "You can invite collaborators from the admin panel.",
+        "cta": "Go to dashboard"
+      },
+      "summary": {
+        "empresa": "Company",
+        "cuit": "CUIT",
+        "admin": "Administrator",
+        "role": "Role",
+        "ownerRole": "Owner",
+        "modules": "Modules"
+      }
+    },
+    "invitacion": {
+      "title": "Accept invitation",
+      "heading": "You've been invited to join an organization",
+      "noToken": "The invitation link is invalid or incomplete.",
+      "tabLogin": "I have an account",
+      "tabRegister": "Create new account",
+      "submitLogin": "Accept invitation and sign in",
+      "submitRegister": "Create account and accept invitation",
+      "disclaimer": "By accepting, your personal TracAuto account will still exist. You'll be able to use both your personal account and the organization from the same login.",
+      "examples": {
+        "firstName": "Lucy",
+        "lastName": "Fernandez",
+        "docNumber": "35,678,901"
+      },
+      "success": {
+        "title": "You've joined the organization!",
+        "subtitle": "You can now access it from the organization selector."
+      }
+    }
+  },
+  "validation": {
+    "email": {
+      "required": "Email is required.",
+      "invalid_format": "The email format is invalid."
+    },
+    "password": {
+      "required": "Password is required.",
+      "min_length": "Password must be at least 8 characters.",
+      "uppercase": "Password must contain at least one uppercase letter.",
+      "digit": "Password must contain at least one number."
+    },
+    "nombre": {
+      "required": "First name is required.",
+      "required_for_new_registration": "First name is required to create a new account."
+    },
+    "apellido": {
+      "required": "Last name is required.",
+      "required_for_new_registration": "Last name is required to create a new account."
+    },
+    "tipo_documento": {
+      "required": "Document type is required.",
+      "required_for_new_registration": "Document type is required to create a new account."
+    },
+    "numero_documento": {
+      "required": "Document number is required.",
+      "required_for_new_registration": "Document number is required to create a new account."
+    },
+    "empresa": {
+      "required": "Company data is required.",
+      "nombre": {
+        "required": "Company name is required."
+      },
+      "cuit": {
+        "required": "Company CUIT is required.",
+        "invalid_format": "The CUIT format is invalid."
+      }
+    },
+    "modulos": {
+      "at_least_one": "Select at least one module."
+    },
+    "invitacion_token": {
+      "required": "An invitation token is required."
+    },
+    "refresh_token": {
+      "not_blank_when_provided": "Refresh token cannot be blank when provided."
+    },
+    "organizacion_id": {
+      "required": "Organization is required."
+    }
+  },
+  "errors": {
+    "unexpected": "An unexpected error occurred.",
+    "network": "Could not connect to the server. Check your internet connection.",
+    "HTTP_400": "Invalid data.",
+    "HTTP_401": "Session expired. Sign in again.",
+    "HTTP_403": "You do not have permission to perform this action.",
+    "HTTP_404": "Resource not found.",
+    "HTTP_409": "Conflict with existing data.",
+    "HTTP_429": "Too many attempts. Please wait.",
+    "HTTP_500": "Server error. We are working on it.",
+    "validation": {
+      "failed": "Review the form data and try again."
+    },
+    "auth": {
+      "credenciales_invalidas": "Incorrect email or password.",
+      "cuenta_bloqueada": "Your account is temporarily locked. Try again later.",
+      "token_expirado": "Your session has expired. Sign in again.",
+      "token_invalido": "Your session is no longer valid.",
+      "token_requerido": "A refresh token is required to continue.",
+      "token_reutilizado": "The session was invalidated for security reasons.",
+      "email_duplicado": "There is already an account with this email.",
+      "sin_acceso_organizacion": "You do not have access to this organization."
+    },
+    "common": {
+      "service_unavailable": "The operation could not be completed right now.",
+      "internal_error": "An internal server error occurred."
+    },
+    "session": {
+      "sin_acceso": "You do not have access to any organization.",
+      "sin_acceso_org": "You do not have access to this organization.",
+      "persona_no_encontrada": "The person linked to the session was not found.",
+      "org_no_encontrada": "The organization does not exist or is not active."
+    },
+    "invitacion": {
+      "invalida": "The invitation is invalid or has expired.",
+      "email_no_coincide": "The email does not match the invitation recipient.",
+      "rol_invalido": "The role does not belong to this organization.",
+      "ya_existe": "There is already a pending invitation for this email.",
+      "no_encontrada": "The invitation was not found.",
+      "no_disponible": "The invitation is no longer available.",
+      "expirada": "The invitation has expired."
+    },
+    "persona": {
+      "ya_tiene_cuenta": "This person already has a user account."
+    },
+    "usuario_organizacion": {
+      "ya_existe": "The user already has access to this organization."
+    }
+  },
+  "context": {
+    "selector": {
+      "greeting": "Hi, {{name}}",
+      "subtitle": "Where do you want to work today?",
+      "personalSection": "Your account",
+      "orgsSection": "Organizations",
+      "personalName": "My personal account",
+      "personalDesc": "Track and manage my vehicles",
+      "switchLabel": "Switch organization"
+    }
+  },
+  "app": {
+    "logout": "Sign out",
+    "dashboard": {
+      "title": "Dashboard",
+      "contextPersonal": "Personal context",
+      "contextEmpresa": "Company context: {{org}}"
+    }
+  }
+}
