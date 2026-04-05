@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useTranslation } from 'react-i18next'
@@ -5,6 +6,7 @@ import { Link } from 'react-router-dom'
 import { Mail } from 'lucide-react'
 import { loginSchema, type LoginFormData } from '../schemas/login-schema'
 import { useLogin } from '../hooks/useLogin'
+import { useGoogleExchange } from '../hooks/useGoogleExchange'
 import {
   hasApiFieldErrors,
   parseApiError,
@@ -14,6 +16,8 @@ import {
 import { Input } from '@/shared/ui/Input'
 import { Button } from '@/shared/ui/Button'
 import { Alert } from '@/shared/ui/Alert'
+import { promptGoogleSignIn } from '@/services/adapters/google-identity'
+import { appConfig } from '@/config/env'
 
 /**
  * Pantalla de login basada en mockup login/index.html.
@@ -28,6 +32,8 @@ export function LoginPage() {
   })
 
   const loginMutation = useLogin()
+  const googleExchangeMutation = useGoogleExchange()
+  const [googleLoading, setGoogleLoading] = useState(false)
 
   // Derivar error general del estado de la mutation — sin useEffect ni useState
   const generalError = (() => {
@@ -36,6 +42,32 @@ export function LoginPage() {
     if (hasApiFieldErrors(apiError)) return null
     return resolveApiErrorMessage(apiError, t)
   })()
+
+  // Error de Google exchange
+  const googleError = (() => {
+    if (googleExchangeMutation.error) {
+      const apiError = parseApiError(googleExchangeMutation.error)
+      return resolveApiErrorMessage(apiError, t)
+    }
+    // requires_account_link se comunica via mutation.data
+    const data = googleExchangeMutation.data?.data
+    if (data?.outcome === 'requires_account_link' && data.message_key) {
+      return t(data.message_key)
+    }
+    return null
+  })()
+
+  function handleGoogleSignIn() {
+    if (!appConfig.googleClientId) return
+
+    setGoogleLoading(true)
+    promptGoogleSignIn(appConfig.googleClientId, (credential) => {
+      setGoogleLoading(false)
+      googleExchangeMutation.mutate({ credential })
+    }).catch(() => {
+      setGoogleLoading(false)
+    })
+  }
 
   const onSubmit = (data: LoginFormData) => {
     loginMutation.mutate(data, {
@@ -66,6 +98,12 @@ export function LoginPage() {
       {generalError ? (
         <div className="mt-4">
           <Alert variant="error">{generalError}</Alert>
+        </div>
+      ) : null}
+
+      {googleError ? (
+        <div className="mt-4">
+          <Alert variant="info">{googleError}</Alert>
         </div>
       ) : null}
 
@@ -114,19 +152,15 @@ export function LoginPage() {
 
       <button
         type="button"
-        disabled
-        className="mt-6 flex w-full items-center justify-center gap-3 rounded-xl border border-[var(--color-surface-3)] px-4 py-3 text-sm font-medium text-[var(--color-text-secondary)] opacity-70"
-        aria-describedby="login-google-unavailable"
+        disabled={googleLoading || googleExchangeMutation.isPending || !appConfig.googleClientId}
+        onClick={handleGoogleSignIn}
+        className="mt-6 flex w-full items-center justify-center gap-3 rounded-xl border border-[var(--color-surface-3)] px-4 py-3 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-surface-2)] disabled:cursor-wait disabled:opacity-70"
       >
         <GoogleMark />
-        {t('auth.login.googleCta')}
+        {googleLoading || googleExchangeMutation.isPending
+          ? t('auth.login.googleLoading')
+          : t('auth.login.googleCta')}
       </button>
-      <p
-        id="login-google-unavailable"
-        className="mt-2 text-center text-xs text-[var(--color-text-tertiary)]"
-      >
-        {t('auth.login.googleUnavailable')}
-      </p>
 
       <div className="mt-6 text-center text-sm text-[var(--color-text-secondary)]">
         {t('auth.login.noAccount')}{' '}

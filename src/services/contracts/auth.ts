@@ -91,3 +91,34 @@ export interface AceptarInvitacionRequest {
 export interface RefreshRequest {
   refreshToken?: string
 }
+
+// --- Google federated auth ---
+
+export interface GoogleExchangeRequest {
+  credential: string
+}
+
+export interface GooglePrefill {
+  email: string
+  nombre: string | null
+  apellido: string | null
+}
+
+export interface GoogleExchangeResponse {
+  outcome: 'authenticated' | 'requires_profile_completion' | 'requires_account_link'
+  accessToken?: string
+  refreshToken?: string
+  sessionSnapshot?: SessionSnapshot
+  registrationTicket?: string
+  prefill?: GooglePrefill
+  code?: string
+  message_key?: string
+  args?: Record<string, unknown>
+}
+
+export interface GoogleCompleteRegistrationRequest {
+  registrationTicket: string
+  tipoDocumento: string
+  numeroDocumento: string
+  password: string
+}

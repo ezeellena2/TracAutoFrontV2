@@ -11,4 +11,5 @@ export const appConfig = {
   ),
   defaultLocale: import.meta.env.VITE_DEFAULT_LOCALE ?? DEFAULT_LOCALE,
   runtimeEnvironment: import.meta.env.MODE,
+  googleClientId: import.meta.env.VITE_GOOGLE_CLIENT_ID ?? '',
 } as const

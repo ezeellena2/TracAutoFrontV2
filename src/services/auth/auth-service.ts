@@ -6,6 +6,9 @@ import type {
   RegistroEmpresaRequest,
   CambiarContextoRequest,
   AceptarInvitacionRequest,
+  GoogleExchangeRequest,
+  GoogleExchangeResponse,
+  GoogleCompleteRegistrationRequest,
 } from '@/services/contracts/auth'
 
 /**
@@ -34,4 +37,10 @@ export const authService = {
 
   aceptarInvitacion: (data: AceptarInvitacionRequest) =>
     httpClient.post<AuthResponse>('/api/auth/aceptar-invitacion', data),
+
+  googleExchange: (data: GoogleExchangeRequest) =>
+    httpClient.post<GoogleExchangeResponse>('/api/auth/google/exchange', data),
+
+  googleCompleteRegistration: (data: GoogleCompleteRegistrationRequest) =>
+    httpClient.post<AuthResponse>('/api/auth/google/complete-registration', data),
 }

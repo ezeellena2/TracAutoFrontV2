@@ -12,6 +12,7 @@ import { LoginPage } from '@/features/access/pages/LoginPage'
 import { RegistroPage } from '@/features/access/pages/RegistroPage'
 import { RegistroEmpresaPage } from '@/features/access/pages/RegistroEmpresaPage'
 import { AceptarInvitacionPage } from '@/features/access/pages/AceptarInvitacionPage'
+import { GoogleCompletionPage } from '@/features/access/pages/GoogleCompletionPage'
 
 // Pages — app (protegidas)
 import { DashboardPage } from '@/features/shell/pages/DashboardPage'
@@ -45,6 +46,7 @@ export function AppRouter() {
           <Route path="registro" element={<RegistroPage />} />
           <Route path="registro-empresa" element={<RegistroEmpresaPage />} />
           <Route path="aceptar-invitacion" element={<AceptarInvitacionPage />} />
+          <Route path="google/completar-registro" element={<GoogleCompletionPage />} />
           <Route index element={<Navigate to="login" replace />} />
         </Route>
 

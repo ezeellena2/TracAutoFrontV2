@@ -183,7 +183,7 @@
       "recoveryPending": "Recuperacion de contraseña disponible en una proxima iteracion.",
       "socialDivider": "o continuar con",
       "googleCta": "Continuar con Google",
-      "googleUnavailable": "Google sign-in todavia no esta habilitado en este slice.",
+      "googleLoading": "Conectando con Google...",
       "noAccount": "¿No tenes cuenta?",
       "createAccount": "Crear cuenta",
       "registerCompany": "Registrar una empresa"
@@ -343,6 +343,22 @@
         "modules": "Modulos"
       }
     },
+    "googleCompletion": {
+      "title": "Completa tu registro",
+      "subtitle": "Solo necesitamos unos datos mas para crear tu cuenta.",
+      "prefillInfo": "Estos datos provienen de tu cuenta de Google:",
+      "docStep": {
+        "title": "Tu documento de identidad",
+        "subtitle": "Necesitamos verificar tu identidad para proteger tu cuenta."
+      },
+      "passwordStep": {
+        "title": "Crea tu contraseña",
+        "subtitle": "Elegi una contraseña segura. La vas a necesitar si queres iniciar sesion sin Google."
+      },
+      "submit": "Crear mi cuenta",
+      "back": "Volver",
+      "continue": "Continuar"
+    },
     "invitacion": {
       "title": "Aceptar invitacion",
       "heading": "Te invitaron a unirte a una organizacion",
@@ -403,6 +419,12 @@
     "modulos": {
       "at_least_one": "Debe seleccionar al menos un modulo."
     },
+    "credential": {
+      "required": "La credencial de Google es obligatoria."
+    },
+    "registration_ticket": {
+      "required": "El ticket de registro es obligatorio."
+    },
     "invitacion_token": {
       "required": "El token de invitacion es obligatorio."
     },
@@ -434,7 +456,13 @@
       "token_requerido": "Se requiere refresh token para continuar.",
       "token_reutilizado": "La sesion fue invalidada por seguridad.",
       "email_duplicado": "Ya existe una cuenta con este email.",
-      "sin_acceso_organizacion": "No tenes acceso a esta organizacion."
+      "sin_acceso_organizacion": "No tenes acceso a esta organizacion.",
+      "google_token_invalido": "No se pudo verificar la sesion de Google. Intenta nuevamente.",
+      "google_account_link_required": "Ya existe una cuenta con este email. Inicia sesion con tu contraseña y luego vincula Google desde tu perfil.",
+      "google_datos_incompletos": "La cuenta de Google no proporciona nombre y apellido completos.",
+      "ticket_invalido": "El enlace de registro no es valido.",
+      "ticket_expirado": "El enlace de registro expiro. Intenta nuevamente con Google.",
+      "ticket_consumido": "Este enlace de registro ya fue utilizado."
     },
     "common": {
       "service_unavailable": "No se pudo completar la operacion en este momento.",
