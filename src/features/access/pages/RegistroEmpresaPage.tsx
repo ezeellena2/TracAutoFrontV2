@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useTranslation } from 'react-i18next'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import {
   registroEmpresaSchema,
   type RegistroEmpresaFormData,
@@ -21,9 +21,9 @@ import { Alert } from '@/shared/ui/Alert'
 import { PasswordStrength } from '@/shared/ui/PasswordStrength'
 import { RegistroProgress } from './registro/RegistroProgress'
 import { ModuleCard } from './registro-empresa/ModuleCard'
-import { RegistroEmpresaSuccess } from './registro-empresa/RegistroEmpresaSuccess'
+import { StepContainer, StepNav, LoginLink } from '../components/StepLayout'
 
-const TOTAL_STEPS = 5
+const TOTAL_STEPS = 4
 
 const AVAILABLE_MODULES = [
   { id: 'flota', icon: '\uD83D\uDE9B' },
@@ -36,12 +36,14 @@ const AVAILABLE_MODULES = [
 ] as const
 
 /**
- * Registro empresa de 5 pasos alineado con mockup registro-empresa/index.html.
- * Pasos: 1-Contacto, 2-Password, 3-Empresa, 4-Modulos, 5-Exito+Resumen.
+ * Registro empresa de 4 pasos alineado con mockup registro-empresa/index.html.
+ * Pasos: 1-Contacto, 2-Password, 3-Empresa, 4-Modulos.
+ * Al enviar el formulario navega a la verificacion por email con ticket en URL.
  */
 export function RegistroEmpresaPage() {
   const { t } = useTranslation()
   const [currentStep, setCurrentStep] = useState(1)
+  const navigate = useNavigate()
 
   const form = useForm<RegistroEmpresaFormData>({
     resolver: zodResolver(registroEmpresaSchema),
@@ -59,6 +61,8 @@ export function RegistroEmpresaPage() {
       empresaRubro: '',
       modulos: [],
     },
+    mode: 'onBlur',
+    reValidateMode: 'onChange',
   })
 
   const registroMutation = useRegistroEmpresa()
@@ -121,7 +125,12 @@ export function RegistroEmpresaPage() {
           },
         },
         {
-          onSuccess: () => setCurrentStep(5),
+          onSuccess: (response) => {
+            navigate(
+              `/auth/verificar-email-registro?ticket=${encodeURIComponent(response.data.verificationTicket)}`,
+              { replace: true },
+            )
+          },
           onError: (error) => {
             const apiError = parseApiError(error)
             const fieldErrors = resolveApiFieldErrors(apiError, t)
@@ -335,17 +344,6 @@ export function RegistroEmpresaPage() {
         </StepContainer>
       ) : null}
 
-      {/* Step 5: Exito */}
-      {currentStep === 5 ? (
-        <RegistroEmpresaSuccess
-          data={{
-            empresaNombre: form.getValues('empresaNombre'),
-            empresaCuit: form.getValues('empresaCuit'),
-            adminNombre: `${form.getValues('nombre')} ${form.getValues('apellido')}`,
-            modulos: form.getValues('modulos'),
-          }}
-        />
-      ) : null}
     </div>
   )
 }
@@ -359,49 +357,4 @@ function fieldError(
 ): string | undefined {
   const msg = form.formState.errors[field]?.message
   return msg ? t(msg) : undefined
-}
-
-// --- Sub-componentes de layout ---
-
-function StepContainer({
-  title,
-  subtitle,
-  children,
-}: {
-  title: string
-  subtitle: string
-  children: React.ReactNode
-}) {
-  return (
-    <div className="flex flex-col">
-      <div className="mb-8">
-        <h1 className="text-2xl font-semibold tracking-tight text-[var(--color-text-primary)]">
-          {title}
-        </h1>
-        <p className="mt-2 text-base leading-relaxed text-[var(--color-text-secondary)]">
-          {subtitle}
-        </p>
-      </div>
-      <div className="flex flex-col gap-5">{children}</div>
-    </div>
-  )
-}
-
-function StepNav({ children }: { children: React.ReactNode }) {
-  return <div className="mt-8 flex gap-3">{children}</div>
-}
-
-function LoginLink() {
-  const { t } = useTranslation()
-  return (
-    <div className="mt-6 text-center text-base text-[var(--color-text-secondary)]">
-      {t('auth.registro.hasAccount')}{' '}
-      <Link
-        to="/auth/login"
-        className="font-medium text-[var(--color-brand-cyan)] hover:underline"
-      >
-        {t('auth.registro.loginLink')}
-      </Link>
-    </div>
-  )
 }

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useTranslation } from 'react-i18next'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { registroSchema, type RegistroFormData } from '../schemas/registro-schema'
 import { useRegistro } from '../hooks/useRegistro'
 import {
@@ -16,19 +16,21 @@ import { Select } from '@/shared/ui/Select'
 import { Button } from '@/shared/ui/Button'
 import { Alert } from '@/shared/ui/Alert'
 import { PasswordStrength } from '@/shared/ui/PasswordStrength'
-import { RegistroStepSuccess } from './registro/RegistroStepSuccess'
 import { RegistroProgress } from './registro/RegistroProgress'
+import { StepContainer, StepNav, LoginLink } from '../components/StepLayout'
 
-const TOTAL_STEPS = 5
+const TOTAL_STEPS = 4
 
 /**
- * Registro B2C de 5 pasos alineado con mockup registro-b2c/index.html.
- * Pasos: 1-Email, 2-Documento, 3-Password, 4-Nombre, 5-Exito.
+ * Registro B2C de 4 pasos alineado con mockup registro-b2c/index.html.
+ * Pasos: 1-Email, 2-Documento, 3-Password, 4-Nombre.
+ * Al enviar el formulario navega a la verificacion por email con ticket en URL.
  * Patron: React Hook Form + Zod + useRegistro hook + parseApiError.
  */
 export function RegistroPage() {
   const { t } = useTranslation()
   const [currentStep, setCurrentStep] = useState(1)
+  const navigate = useNavigate()
 
   const form = useForm<RegistroFormData>({
     resolver: zodResolver(registroSchema),
@@ -41,6 +43,8 @@ export function RegistroPage() {
       nombre: '',
       apellido: '',
     },
+    mode: 'onBlur',
+    reValidateMode: 'onChange',
   })
 
   const registroMutation = useRegistro()
@@ -71,8 +75,11 @@ export function RegistroPage() {
       const { confirmPassword, ...request } = data
       void confirmPassword
       registroMutation.mutate(request, {
-        onSuccess: () => {
-          setCurrentStep(5)
+        onSuccess: (response) => {
+          navigate(
+            `/auth/verificar-email-registro?ticket=${encodeURIComponent(response.data.verificationTicket)}`,
+            { replace: true },
+          )
         },
         onError: (error) => {
           const apiError = parseApiError(error)
@@ -246,55 +253,6 @@ export function RegistroPage() {
         </StepContainer>
       ) : null}
 
-      {/* Step 5: Exito */}
-      {currentStep === 5 ? (
-        <RegistroStepSuccess />
-      ) : null}
-    </div>
-  )
-}
-
-// --- Sub-componentes internos (layout de step) ---
-
-function StepContainer({
-  title,
-  subtitle,
-  children,
-}: {
-  title: string
-  subtitle: string
-  children: React.ReactNode
-}) {
-  return (
-    <div className="flex flex-col">
-      <div className="mb-8">
-        <h1 className="text-2xl font-semibold tracking-tight text-[var(--color-text-primary)]">
-          {title}
-        </h1>
-        <p className="mt-2 text-base leading-relaxed text-[var(--color-text-secondary)]">
-          {subtitle}
-        </p>
-      </div>
-      <div className="flex flex-col gap-5">{children}</div>
-    </div>
-  )
-}
-
-function StepNav({ children }: { children: React.ReactNode }) {
-  return <div className="mt-8 flex gap-3">{children}</div>
-}
-
-function LoginLink() {
-  const { t } = useTranslation()
-  return (
-    <div className="mt-6 text-center text-base text-[var(--color-text-secondary)]">
-      {t('auth.registro.hasAccount')}{' '}
-      <Link
-        to="/auth/login"
-        className="font-medium text-[var(--color-brand-cyan)] hover:underline"
-      >
-        {t('auth.registro.loginLink')}
-      </Link>
     </div>
   )
 }

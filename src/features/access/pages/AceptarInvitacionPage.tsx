@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useForm } from 'react-hook-form'
+import { useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useTranslation } from 'react-i18next'
 import { useSearchParams } from 'react-router-dom'
@@ -152,6 +152,8 @@ function InviteLoginForm({
   const form = useForm<InvitacionLoginFormData>({
     resolver: zodResolver(invitacionLoginSchema),
     defaultValues: { token, email: '', password: '', esRegistroNuevo: false },
+    mode: 'onBlur',
+    reValidateMode: 'onChange',
   })
 
   function handleSubmit() {
@@ -226,9 +228,11 @@ function InviteRegisterForm({
       confirmPassword: '',
       esRegistroNuevo: true,
     },
+    mode: 'onBlur',
+    reValidateMode: 'onChange',
   })
 
-  const passwordValue = form.getValues('password')
+  const passwordValue = useWatch({ control: form.control, name: 'password' })
 
   const docTypeOptions = [
     { value: 'dni', label: t('auth.registro.docTypes.dni') },

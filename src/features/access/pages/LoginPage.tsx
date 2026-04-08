@@ -29,6 +29,8 @@ export function LoginPage() {
   const form = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
     defaultValues: { email: '', password: '' },
+    mode: 'onBlur',
+    reValidateMode: 'onChange',
   })
 
   const loginMutation = useLogin()
@@ -51,8 +53,9 @@ export function LoginPage() {
     }
     // requires_account_link se comunica via mutation.data
     const data = googleExchangeMutation.data?.data
-    if (data?.outcome === 'requires_account_link' && data.message_key) {
-      return t(data.message_key)
+    const outcomeMessageKey = data?.message_key ?? data?.messageKey
+    if (data?.outcome === 'requires_account_link' && outcomeMessageKey) {
+      return t(outcomeMessageKey)
     }
     return null
   })()
@@ -131,9 +134,14 @@ export function LoginPage() {
           {...form.register('password')}
         />
 
-        <p className="text-right text-xs text-[var(--color-text-tertiary)]">
-          {t('auth.login.recoveryPending')}
-        </p>
+        <div className="text-right">
+          <Link
+            to="/auth/recuperar-password"
+            className="text-xs font-medium text-[var(--color-brand-cyan)] hover:underline"
+          >
+            {t('auth.login.forgotPassword')}
+          </Link>
+        </div>
 
         <Button type="submit" loading={loginMutation.isPending}>
           {loginMutation.isPending

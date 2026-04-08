@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Menu, X } from 'lucide-react'
 import { TracAutoMark } from '@/shared/ui/TracAutoMark'
+import { LandingThemeSwitcher } from './LandingThemeSwitcher'
 
 export function LandingNavbar() {
   const { t } = useTranslation()
@@ -76,6 +77,7 @@ function NavActions() {
   const { t } = useTranslation()
   return (
     <div className="hidden items-center gap-3 md:flex">
+      <LandingThemeSwitcher />
       <Link to="/auth/login" className="rounded-lg px-4 py-2 text-sm font-medium text-[var(--text-secondary)] transition-colors hover:text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--cyan)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-base)]">
         {t('landing.nav.login')}
       </Link>

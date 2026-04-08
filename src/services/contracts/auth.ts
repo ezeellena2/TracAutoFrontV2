@@ -7,7 +7,7 @@
 
 export interface AuthResponse {
   accessToken: string
-  refreshToken: string
+  refreshToken?: string | null
   sessionSnapshot: SessionSnapshot
 }
 
@@ -73,6 +73,24 @@ export interface RegistroEmpresaRequest {
   modulos: string[]
 }
 
+export interface RegistroPendienteResponse {
+  verificationTicket: string
+  maskedEmail: string
+  tipoRegistro: 'cliente_final' | 'empresa'
+  expiraEnUtc: string
+  puedeReenviarEnUtc?: string | null
+  expirado: boolean
+}
+
+export interface VerificarCodigoRegistroRequest {
+  verificationTicket: string
+  codigo: string
+}
+
+export interface ReenviarCodigoRegistroRequest {
+  verificationTicket: string
+}
+
 export interface CambiarContextoRequest {
   organizacionId: string
 }
@@ -90,6 +108,15 @@ export interface AceptarInvitacionRequest {
 
 export interface RefreshRequest {
   refreshToken?: string
+}
+
+export interface SolicitarRecuperacionPasswordRequest {
+  email: string
+}
+
+export interface RestablecerPasswordRequest {
+  token: string
+  nuevaPassword: string
 }
 
 // --- Google federated auth ---
@@ -112,8 +139,14 @@ export interface GoogleExchangeResponse {
   registrationTicket?: string
   prefill?: GooglePrefill
   code?: string
+  messageKey?: string
   message_key?: string
   args?: Record<string, unknown>
+}
+
+export interface GooglePendingRegistrationResponse {
+  registrationTicket: string
+  prefill: GooglePrefill
 }
 
 export interface GoogleCompleteRegistrationRequest {

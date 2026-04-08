@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { ArrowLeftRight, LogOut } from 'lucide-react'
 import { useSessionStore } from '@/stores/session-store'
 import { useLogout } from '@/features/access/hooks/useLogout'
+import { ThemeSwitcher } from '@/shared/ui/ThemeSwitcher'
 
 /**
  * Shell autenticado. Envuelto por ProtectedRoute.
@@ -30,10 +31,11 @@ export function AppShell() {
             <ArrowLeftRight className="h-5 w-5" />
           </Link>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
           <span className="text-sm text-[var(--color-text-secondary)]">
             {nombre} {apellido}
           </span>
+          <ThemeSwitcher />
           <button
             type="button"
             onClick={() => logoutMutation.mutate()}

@@ -1,5 +1,4 @@
 import { useTranslation } from 'react-i18next'
-import { Link } from 'react-router-dom'
 import { CheckCircle } from 'lucide-react'
 interface SummaryData {
   empresaNombre: string
@@ -11,7 +10,7 @@ interface SummaryData {
 /**
  * Paso 5 del registro empresa: exito con resumen.
  */
-export function RegistroEmpresaSuccess({ data }: { data: SummaryData }) {
+export function RegistroEmpresaSuccess({ data, onGoToApp }: { data: SummaryData; onGoToApp: () => void }) {
   const { t } = useTranslation()
 
   return (
@@ -32,12 +31,13 @@ export function RegistroEmpresaSuccess({ data }: { data: SummaryData }) {
         {t('auth.registroEmpresa.success.inviteHint')}
       </p>
       <div className="mt-6">
-        <Link
-          to="/app"
+        <button
+          type="button"
+          onClick={onGoToApp}
           className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-xl bg-[var(--color-brand-amber)] px-4 py-3 text-sm font-semibold text-[var(--color-bg-canvas)] transition-all hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-brand-cyan)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg-canvas)]"
         >
           {t('auth.registroEmpresa.success.cta')}
-        </Link>
+        </button>
       </div>
     </div>
   )

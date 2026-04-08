@@ -54,7 +54,7 @@ export function parseApiError(error: unknown): ApiError {
     return {
       status,
       type: null,
-      title: status === 0 ? 'Error de conexion' : 'Error',
+      title: status === 0 ? 'Network Error' : 'Error',
       detail: typeof error.message === 'string' ? error.message : null,
       code: status === 0 ? 'network' : null,
       messageKey: status === 0 ? 'errors.network' : null,

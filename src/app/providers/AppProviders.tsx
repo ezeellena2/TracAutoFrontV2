@@ -1,8 +1,10 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { useEffect, useState, type PropsWithChildren } from 'react'
-import { setupSessionBridge } from '@/services/session/setup-session-bridge'
+import { useState, type PropsWithChildren } from 'react'
+import { useThemeSync } from '@/shared/hooks/useThemeSync'
 
 export function AppProviders({ children }: PropsWithChildren) {
+  useThemeSync()
+
   const [queryClient] = useState(
     () =>
       new QueryClient({
@@ -18,11 +20,6 @@ export function AppProviders({ children }: PropsWithChildren) {
         },
       }),
   )
-
-  // Conectar el bridge de sesion al store — una sola vez al montar
-  useEffect(() => {
-    setupSessionBridge()
-  }, [])
 
   return <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
 }

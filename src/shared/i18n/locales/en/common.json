@@ -48,7 +48,12 @@
   },
   "common": {
     "loading": "Loading...",
-    "brandPlatform": "web platform"
+    "brandPlatform": "web platform",
+    "theme": {
+      "toggle": "Toggle theme",
+      "dark": "Dark mode",
+      "light": "Light mode"
+    }
   },
   "landing": {
     "nav": {
@@ -180,13 +185,64 @@
       "passwordLabel": "Password",
       "passwordPlaceholder": "Your password",
       "submit": "Sign in",
-      "recoveryPending": "Password recovery will be available in a future iteration.",
+      "forgotPassword": "Forgot your password?",
       "socialDivider": "or continue with",
       "googleCta": "Continue with Google",
       "googleUnavailable": "Google sign-in is not enabled in this slice yet.",
       "noAccount": "Don't have an account?",
       "createAccount": "Create account",
       "registerCompany": "Register a company"
+    },
+    "passwordRecovery": {
+      "eyebrow": "Recovery",
+      "title": "Recover your access",
+      "subtitle": "Enter the email you used to create your account and we'll send you a link to choose a new password.",
+      "emailLabel": "Email",
+      "emailPlaceholder": "you@email.com",
+      "helper": "For security reasons, we'll always show the same message even if the email does not exist.",
+      "submit": "Send recovery link",
+      "backToLogin": "Back to sign in",
+      "success": {
+        "title": "Check your email",
+        "subtitle": "If there is an account associated with {{email}}, you'll receive instructions to reset your password.",
+        "disclaimer": "The link expires soon and can only be used once.",
+        "backToLogin": "Back to sign in"
+      }
+    },
+    "passwordReset": {
+      "eyebrow": "Reset access",
+      "title": "Create a new password",
+      "subtitle": "Choose a secure password to regain access to your account.",
+      "tokenMissing": "The recovery link is invalid or incomplete.",
+      "requestAnotherLink": "Request a new link",
+      "newPasswordLabel": "New password",
+      "newPasswordPlaceholder": "At least 8 characters",
+      "confirmPasswordLabel": "Confirm new password",
+      "confirmPasswordPlaceholder": "Repeat your new password",
+      "expirationHint": "When you confirm the change, any previous session will be closed for security reasons.",
+      "submit": "Save new password",
+      "backToLogin": "Back to sign in",
+      "success": {
+        "title": "Password updated",
+        "subtitle": "You can now sign in with your new password.",
+        "sessionsHint": "If you had active sessions on other devices, they were closed automatically.",
+        "loginCta": "Go to sign in"
+      }
+    },
+    "emailVerification": {
+      "eyebrow": "Email verification",
+      "title": "Verify your email",
+      "subtitle": "Enter the 6-digit code we sent to {{email}} to complete your registration.",
+      "expiredHint": "The code sent to {{email}} has expired. You can request a new one from this screen.",
+      "helper": "We sent the code to {{email}}. If you don't see it, check spam or resend it when the countdown reaches zero.",
+      "codeLabel": "Verification code",
+      "codePlaceholder": "123456",
+      "expirationHint": "The code expires soon and only the latest one you received remains valid.",
+      "submit": "Verify and create account",
+      "resend": "Resend code",
+      "resendCountdown": "Resend code in {{seconds}}s",
+      "resendSuccess": "We sent you a new verification code.",
+      "backToLogin": "Back to sign in"
     },
     "errors": {
       "emailRequired": "Email is required",
@@ -195,6 +251,8 @@
       "passwordMinLength": "Password must be at least 8 characters",
       "passwordUppercase": "Password must contain at least one uppercase letter",
       "passwordDigit": "Password must contain at least one number",
+      "codigoVerificacionRequired": "Verification code is required",
+      "codigoVerificacionInvalid": "The code must contain 6 digits",
       "confirmPasswordRequired": "Please confirm your password",
       "passwordMismatch": "Passwords do not match",
       "docTypeRequired": "Document type is required",
@@ -210,7 +268,7 @@
       "title": "Create account",
       "continue": "Continue",
       "back": "Back",
-      "submit": "Create my account",
+      "submit": "Send verification code",
       "hasAccount": "Already have an account?",
       "loginLink": "Sign in",
       "emailLabel": "Email",
@@ -264,7 +322,7 @@
     },
     "registroEmpresa": {
       "title": "Register company",
-      "submit": "Register company",
+      "submit": "Send verification code",
       "emailLabel": "Corporate email",
       "phoneLabel": "Phone",
       "docLabel": "Document",
@@ -374,6 +432,9 @@
       "uppercase": "Password must contain at least one uppercase letter.",
       "digit": "Password must contain at least one number."
     },
+    "token": {
+      "required": "Token is required."
+    },
     "nombre": {
       "required": "First name is required.",
       "required_for_new_registration": "First name is required to create a new account."
@@ -402,6 +463,13 @@
     },
     "modulos": {
       "at_least_one": "Select at least one module."
+    },
+    "registration_ticket": {
+      "required": "Registration ticket is required."
+    },
+    "codigo_verificacion": {
+      "required": "Verification code is required.",
+      "invalid_format": "Verification code must contain 6 digits."
     },
     "invitacion_token": {
       "required": "An invitation token is required."
@@ -434,7 +502,15 @@
       "token_requerido": "A refresh token is required to continue.",
       "token_reutilizado": "The session was invalidated for security reasons.",
       "email_duplicado": "There is already an account with this email.",
-      "sin_acceso_organizacion": "You do not have access to this organization."
+      "sin_acceso_organizacion": "You do not have access to this organization.",
+      "password_reset_token_invalido": "The recovery link is invalid or has expired.",
+      "registro_verificacion_ticket_invalido": "The verification link is invalid.",
+      "registro_verificacion_ticket_consumido": "This verification link has already been used.",
+      "registro_verificacion_expirada": "The code has expired. Request a new one to continue.",
+      "registro_verificacion_codigo_invalido": "The code you entered is incorrect.",
+      "registro_verificacion_reenvio_temprano": "You must wait {{seconds}} seconds before resending the code.",
+      "registro_verificacion_demasiados_reenvios": "You reached the maximum number of resends. Start the registration again.",
+      "registro_verificacion_pendiente_existente": "There is already a pending registration for this email. Use the verification link that was already sent, or request a new code from that flow."
     },
     "common": {
       "service_unavailable": "The operation could not be completed right now.",

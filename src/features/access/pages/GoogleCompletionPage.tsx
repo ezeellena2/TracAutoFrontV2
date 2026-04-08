@@ -2,12 +2,13 @@ import { useState } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useTranslation } from 'react-i18next'
-import { Navigate, useLocation, Link } from 'react-router-dom'
+import { Link, Navigate, useSearchParams } from 'react-router-dom'
 import {
   googleCompletionSchema,
   type GoogleCompletionFormData,
 } from '../schemas/google-completion-schema'
 import { useGoogleCompleteRegistration } from '../hooks/useGoogleCompleteRegistration'
+import { useGooglePendingRegistration } from '../hooks/useGooglePendingRegistration'
 import {
   hasApiFieldErrors,
   parseApiError,
@@ -21,37 +22,68 @@ import { Alert } from '@/shared/ui/Alert'
 import { PasswordStrength } from '@/shared/ui/PasswordStrength'
 import type { GooglePrefill } from '@/services/contracts/auth'
 
-interface LocationState {
-  registrationTicket: string
-  prefill: GooglePrefill
-}
-
 const TOTAL_STEPS = 3
 
 /**
  * Pagina de completar registro federado (Google Sign-In).
  * El usuario llega aca despues de un exchange con outcome requires_profile_completion.
- * Recibe registrationTicket y prefill via location.state.
+ * Recupera el registrationTicket desde la URL y el prefill desde backend.
  * Pasos: 1-Documento, 2-Password, 3-Exito (via navegacion a /app).
  */
 export function GoogleCompletionPage() {
   const { t } = useTranslation()
-  const location = useLocation()
+  const [searchParams] = useSearchParams()
   const [currentStep, setCurrentStep] = useState(1)
+  const registrationTicket = searchParams.get('ticket')?.trim() ?? ''
+  const pendingRegistrationQuery = useGooglePendingRegistration(
+    registrationTicket || null,
+  )
 
-  const state = location.state as LocationState | null
-
-  // Si no hay state (navegacion directa), redirigir a login
-  if (!state?.registrationTicket) {
+  if (!registrationTicket) {
     return <Navigate to="/auth/login" replace />
   }
 
-  const { registrationTicket, prefill } = state
+  if (pendingRegistrationQuery.isLoading) {
+    return (
+      <div className="rounded-2xl bg-[var(--color-surface-1)] p-8">
+        <p className="text-sm text-[var(--color-text-secondary)]">
+          {t('common.loading')}
+        </p>
+      </div>
+    )
+  }
+
+  if (pendingRegistrationQuery.error) {
+    const apiError = parseApiError(pendingRegistrationQuery.error)
+    return (
+      <div className="rounded-2xl bg-[var(--color-surface-1)] p-8">
+        <h1 className="text-2xl font-semibold tracking-tight text-[var(--color-text-primary)]">
+          {t('auth.googleCompletion.title')}
+        </h1>
+        <div className="mt-4">
+          <Alert variant="error">{resolveApiErrorMessage(apiError, t)}</Alert>
+        </div>
+        <div className="mt-6">
+          <Link
+            to="/auth/login"
+            className="inline-flex min-h-[44px] items-center justify-center rounded-xl border border-[var(--color-surface-3)] px-6 text-sm font-medium text-[var(--color-text-secondary)] hover:bg-[var(--color-surface-2)]"
+          >
+            {t('auth.googleCompletion.back')}
+          </Link>
+        </div>
+      </div>
+    )
+  }
+
+  const pendingRegistration = pendingRegistrationQuery.data?.data
+  if (!pendingRegistration) {
+    return <Navigate to="/auth/login" replace />
+  }
 
   return (
     <GoogleCompletionForm
-      registrationTicket={registrationTicket}
-      prefill={prefill}
+      registrationTicket={pendingRegistration.registrationTicket}
+      prefill={pendingRegistration.prefill}
       currentStep={currentStep}
       setCurrentStep={setCurrentStep}
       t={t}
@@ -80,6 +112,8 @@ function GoogleCompletionForm({
       password: '',
       confirmPassword: '',
     },
+    mode: 'onBlur',
+    reValidateMode: 'onChange',
   })
 
   const completionMutation = useGoogleCompleteRegistration()

@@ -68,6 +68,59 @@
     inset 0 1px 0 rgba(240, 244, 248, 0.04);
 }
 
+/* ═══════════════════════════════════════════
+   THEME: Light
+   ═══════════════════════════════════════════ */
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  /* ── Tailwind @theme overrides ─── */
+  --color-bg-canvas: #F8FAFC;
+  --color-surface-primary: #FFFFFF;
+  --color-surface-secondary: #F1F5F9;
+  --color-surface-tertiary: #E2E8F0;
+  --color-border-subtle: rgba(100, 116, 139, 0.18);
+  --color-border-strong: rgba(100, 116, 139, 0.3);
+  --color-text-primary: #0F172A;
+  --color-text-secondary: #64748B;
+  --color-text-tertiary: #94A3B8;
+
+  /* ── Mockup token overrides ─── */
+  --bg-base: #F8FAFC;
+  --surface-1: #FFFFFF;
+  --surface-2: #F1F5F9;
+  --surface-3: #E2E8F0;
+  --border-color: #E2E8F0;
+  --border-hover: #CBD5E1;
+  --text-primary: #0F172A;
+  --text-secondary: #64748B;
+  --text-tertiary: #94A3B8;
+
+  /* ── Glows (atenuados para light) ─── */
+  --cyan-glow: rgba(6, 182, 212, 0.08);
+  --cyan-muted: rgba(6, 182, 212, 0.10);
+  --cyan-subtle: rgba(6, 182, 212, 0.05);
+  --amber-glow: rgba(245, 158, 11, 0.08);
+  --amber-muted: rgba(245, 158, 11, 0.10);
+
+  /* ── Glass & overlays ─── */
+  --glass-bg: rgba(255, 255, 255, 0.8);
+  --overlay: rgba(15, 23, 42, 0.5);
+
+  /* ── Shadows (light-appropriate) ─── */
+  --shadow-panel:
+    0 4px 24px rgba(0, 0, 0, 0.06),
+    0 1px 2px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+
+  /* ── Gradients (subtle for light) ─── */
+  --gradient-panel:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(241, 245, 249, 0.96));
+  --gradient-brand:
+    radial-gradient(circle at top, rgba(6, 182, 212, 0.08), transparent 42%),
+    linear-gradient(135deg, rgba(245, 158, 11, 0.06), rgba(6, 182, 212, 0.04));
+}
+
 @layer base {
   html {
     font-family: var(--font-sans);
@@ -75,6 +128,13 @@
       radial-gradient(circle at top, rgba(6, 182, 212, 0.12), transparent 22%),
       linear-gradient(180deg, #090d17 0%, #080b14 100%);
     color: var(--color-text-primary);
+    transition: background 0.3s ease;
+  }
+
+  html[data-theme="light"] {
+    background:
+      radial-gradient(circle at top, rgba(6, 182, 212, 0.04), transparent 22%),
+      linear-gradient(180deg, #FAFBFD 0%, #F8FAFC 100%);
   }
 
   body {
@@ -123,6 +183,12 @@
       radial-gradient(circle at 15% 20%, rgba(6, 182, 212, 0.1), transparent 22%),
       radial-gradient(circle at 85% 15%, rgba(245, 158, 11, 0.1), transparent 24%);
     pointer-events: none;
+  }
+
+  [data-theme="light"] .page-shell::before {
+    background:
+      radial-gradient(circle at 15% 20%, rgba(6, 182, 212, 0.03), transparent 22%),
+      radial-gradient(circle at 85% 15%, rgba(245, 158, 11, 0.03), transparent 24%);
   }
 
   .glass-panel {

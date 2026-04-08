@@ -13,6 +13,18 @@
     <title>TracAuto v2 Web</title>
   </head>
   <body>
+    <script>
+      // Anti-flash: apply persisted theme before React mounts
+      (function() {
+        try {
+          var p = JSON.parse(localStorage.getItem('tracauto-preferences') || '{}');
+          var s = p && p.state;
+          if (s && s.theme && s.theme !== 'dark') {
+            document.documentElement.setAttribute('data-theme', s.theme);
+          }
+        } catch(e) {}
+      })();
+    </script>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

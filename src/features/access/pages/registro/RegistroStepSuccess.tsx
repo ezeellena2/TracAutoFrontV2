@@ -1,11 +1,15 @@
 import { useTranslation } from 'react-i18next'
-import { Link } from 'react-router-dom'
 import { CheckCircle } from 'lucide-react'
+
+interface RegistroStepSuccessProps {
+  onGoToApp: () => void
+}
+
 /**
  * Paso 5 del registro: confirmacion de exito.
- * Muestra check animado + mensaje + boton a /app.
+ * Muestra check animado + mensaje + boton que activa login y navega a /app.
  */
-export function RegistroStepSuccess() {
+export function RegistroStepSuccess({ onGoToApp }: RegistroStepSuccessProps) {
   const { t } = useTranslation()
 
   return (
@@ -20,12 +24,13 @@ export function RegistroStepSuccess() {
         {t('auth.registro.success.subtitle')}
       </p>
       <div className="mt-6">
-        <Link
-          to="/app"
+        <button
+          type="button"
+          onClick={onGoToApp}
           className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-xl bg-[var(--color-brand-amber)] px-4 py-3 text-sm font-semibold text-[var(--color-bg-canvas)] transition-all hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-brand-cyan)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg-canvas)]"
         >
           {t('auth.registro.success.cta')}
-        </Link>
+        </button>
       </div>
     </div>
   )

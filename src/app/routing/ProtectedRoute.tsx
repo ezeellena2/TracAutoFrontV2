@@ -3,7 +3,7 @@ import { useSessionStore } from '@/stores/session-store'
 import { authService } from '@/services/auth/auth-service'
 import { useTranslation } from 'react-i18next'
 import { useMutation } from '@tanstack/react-query'
-import { useEffect, type PropsWithChildren } from 'react'
+import { useEffect, useRef, type PropsWithChildren } from 'react'
 
 /**
  * Guard que protege rutas autenticadas.
@@ -18,6 +18,7 @@ export function ProtectedRoute({ children }: PropsWithChildren) {
   const isAuthenticated = useSessionStore((s) => s.isAuthenticated)
   const login = useSessionStore((s) => s.login)
   const location = useLocation()
+  const recoveryAttempted = useRef(false)
 
   const recovery = useMutation({
     mutationFn: () => authService.refresh(),
@@ -27,10 +28,12 @@ export function ProtectedRoute({ children }: PropsWithChildren) {
   })
 
   useEffect(function attemptSessionRecovery() {
-    if (!isAuthenticated && recovery.isIdle) {
+    if (!isAuthenticated && !recoveryAttempted.current) {
+      recoveryAttempted.current = true
       recovery.mutate()
     }
-  }, [isAuthenticated, recovery])
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- recovery ref is stable; including the object would cause re-runs
+  }, [isAuthenticated])
 
   // Ya autenticado (directo o por recovery)
   if (isAuthenticated) {

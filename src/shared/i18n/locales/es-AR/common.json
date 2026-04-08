@@ -48,7 +48,12 @@
   },
   "common": {
     "loading": "Cargando...",
-    "brandPlatform": "plataforma web"
+    "brandPlatform": "plataforma web",
+    "theme": {
+      "toggle": "Cambiar tema",
+      "dark": "Modo oscuro",
+      "light": "Modo claro"
+    }
   },
   "landing": {
     "nav": {
@@ -180,13 +185,64 @@
       "passwordLabel": "Contraseña",
       "passwordPlaceholder": "Tu contraseña",
       "submit": "Iniciar sesion",
-      "recoveryPending": "Recuperacion de contraseña disponible en una proxima iteracion.",
+      "forgotPassword": "¿Olvidaste tu contraseña?",
       "socialDivider": "o continuar con",
       "googleCta": "Continuar con Google",
       "googleLoading": "Conectando con Google...",
       "noAccount": "¿No tenes cuenta?",
       "createAccount": "Crear cuenta",
       "registerCompany": "Registrar una empresa"
+    },
+    "passwordRecovery": {
+      "eyebrow": "Recuperacion",
+      "title": "Recupera tu acceso",
+      "subtitle": "Ingresa el email con el que creaste tu cuenta y te enviaremos un link para elegir una nueva contraseña.",
+      "emailLabel": "Email",
+      "emailPlaceholder": "tu@email.com",
+      "helper": "Por seguridad, siempre mostraremos el mismo mensaje aunque el email no exista.",
+      "submit": "Enviar link de recuperacion",
+      "backToLogin": "Volver al login",
+      "success": {
+        "title": "Revisa tu email",
+        "subtitle": "Si existe una cuenta asociada a {{email}}, vas a recibir instrucciones para restablecer tu contraseña.",
+        "disclaimer": "El link vence pronto y solo puede usarse una vez.",
+        "backToLogin": "Volver al login"
+      }
+    },
+    "passwordReset": {
+      "eyebrow": "Restablecer acceso",
+      "title": "Crea una nueva contraseña",
+      "subtitle": "Elige una contraseña segura para volver a entrar a tu cuenta.",
+      "tokenMissing": "El enlace de recuperacion no es valido o esta incompleto.",
+      "requestAnotherLink": "Solicitar un nuevo link",
+      "newPasswordLabel": "Nueva contraseña",
+      "newPasswordPlaceholder": "Minimo 8 caracteres",
+      "confirmPasswordLabel": "Confirmar nueva contraseña",
+      "confirmPasswordPlaceholder": "Repeti tu nueva contraseña",
+      "expirationHint": "Cuando confirmes el cambio, cerraremos cualquier sesion anterior por seguridad.",
+      "submit": "Guardar nueva contraseña",
+      "backToLogin": "Volver al login",
+      "success": {
+        "title": "Contraseña actualizada",
+        "subtitle": "Ya puedes iniciar sesion con tu nueva contraseña.",
+        "sessionsHint": "Si tenias sesiones activas en otros dispositivos, se cerraron automaticamente.",
+        "loginCta": "Ir a iniciar sesion"
+      }
+    },
+    "emailVerification": {
+      "eyebrow": "Verificacion de email",
+      "title": "Verifica tu email",
+      "subtitle": "Ingresa el codigo de 6 digitos que enviamos a {{email}} para completar tu registro.",
+      "expiredHint": "El codigo que te enviamos a {{email}} vencio. Puedes solicitar uno nuevo desde esta pantalla.",
+      "helper": "Enviamos el codigo a {{email}}. Si no lo ves, revisa spam o reenvialo cuando el contador llegue a cero.",
+      "codeLabel": "Codigo de verificacion",
+      "codePlaceholder": "123456",
+      "expirationHint": "El codigo vence pronto y solo queda activo el ultimo que recibiste.",
+      "submit": "Verificar y crear cuenta",
+      "resend": "Reenviar codigo",
+      "resendCountdown": "Reenviar codigo en {{seconds}}s",
+      "resendSuccess": "Te enviamos un nuevo codigo de verificacion.",
+      "backToLogin": "Volver al login"
     },
     "errors": {
       "emailRequired": "El email es obligatorio",
@@ -195,6 +251,8 @@
       "passwordMinLength": "La contraseña debe tener al menos 8 caracteres",
       "passwordUppercase": "La contraseña debe tener al menos una mayuscula",
       "passwordDigit": "La contraseña debe tener al menos un numero",
+      "codigoVerificacionRequired": "El codigo de verificacion es obligatorio",
+      "codigoVerificacionInvalid": "El codigo debe tener 6 digitos",
       "confirmPasswordRequired": "Confirma tu contraseña",
       "passwordMismatch": "Las contraseñas no coinciden",
       "docTypeRequired": "El tipo de documento es obligatorio",
@@ -210,7 +268,7 @@
       "title": "Crear cuenta",
       "continue": "Continuar",
       "back": "Volver",
-      "submit": "Crear mi cuenta",
+      "submit": "Enviar codigo de verificacion",
       "hasAccount": "¿Ya tenes cuenta?",
       "loginLink": "Inicia sesion",
       "emailLabel": "Email",
@@ -264,7 +322,7 @@
     },
     "registroEmpresa": {
       "title": "Registrar empresa",
-      "submit": "Registrar empresa",
+      "submit": "Enviar codigo de verificacion",
       "emailLabel": "Email corporativo",
       "phoneLabel": "Telefono",
       "docLabel": "Documento",
@@ -390,6 +448,9 @@
       "uppercase": "La contraseña debe tener al menos una mayuscula.",
       "digit": "La contraseña debe tener al menos un numero."
     },
+    "token": {
+      "required": "El token es obligatorio."
+    },
     "nombre": {
       "required": "El nombre es obligatorio.",
       "required_for_new_registration": "El nombre es obligatorio para crear una cuenta nueva."
@@ -424,6 +485,10 @@
     },
     "registration_ticket": {
       "required": "El ticket de registro es obligatorio."
+    },
+    "codigo_verificacion": {
+      "required": "El codigo de verificacion es obligatorio.",
+      "invalid_format": "El codigo de verificacion debe tener 6 digitos."
     },
     "invitacion_token": {
       "required": "El token de invitacion es obligatorio."
@@ -462,7 +527,15 @@
       "google_datos_incompletos": "La cuenta de Google no proporciona nombre y apellido completos.",
       "ticket_invalido": "El enlace de registro no es valido.",
       "ticket_expirado": "El enlace de registro expiro. Intenta nuevamente con Google.",
-      "ticket_consumido": "Este enlace de registro ya fue utilizado."
+      "ticket_consumido": "Este enlace de registro ya fue utilizado.",
+      "password_reset_token_invalido": "El link de recuperacion no es valido o ya vencio.",
+      "registro_verificacion_ticket_invalido": "El enlace de verificacion no es valido.",
+      "registro_verificacion_ticket_consumido": "Este enlace de verificacion ya fue utilizado.",
+      "registro_verificacion_expirada": "El codigo vencio. Solicita uno nuevo para continuar.",
+      "registro_verificacion_codigo_invalido": "El codigo ingresado es incorrecto.",
+      "registro_verificacion_reenvio_temprano": "Debes esperar {{seconds}} segundos antes de reenviar el codigo.",
+      "registro_verificacion_demasiados_reenvios": "Alcanzaste el maximo de reenvios permitidos. Vuelve a iniciar el registro.",
+      "registro_verificacion_pendiente_existente": "Ya hay un registro pendiente para este email. Usa el enlace de verificacion ya enviado o solicita un nuevo codigo desde ese flujo."
     },
     "common": {
       "service_unavailable": "No se pudo completar la operacion en este momento.",

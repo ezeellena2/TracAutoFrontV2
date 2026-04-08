@@ -9,7 +9,7 @@ import type { GoogleExchangeRequest } from '@/services/contracts/auth'
  * 1. Llama a authService.googleExchange()
  * 2. Segun el outcome:
  *    - authenticated: actualiza store y navega a /app
- *    - requires_profile_completion: navega a completar registro con ticket y prefill
+ *    - requires_profile_completion: navega a completar registro con ticket en la URL
  *    - requires_account_link: no navega, la pagina muestra un alert
  */
 export function useGoogleExchange() {
@@ -21,10 +21,10 @@ export function useGoogleExchange() {
     onSuccess: (response) => {
       const data = response.data
 
-      if (data.outcome === 'authenticated' && data.sessionSnapshot) {
+      if (data.outcome === 'authenticated' && data.accessToken && data.sessionSnapshot) {
         login({
-          accessToken: data.accessToken!,
-          refreshToken: data.refreshToken!,
+          accessToken: data.accessToken,
+          refreshToken: data.refreshToken ?? null,
           sessionSnapshot: data.sessionSnapshot,
         })
         navigate('/app', { replace: true })
@@ -32,13 +32,10 @@ export function useGoogleExchange() {
       }
 
       if (data.outcome === 'requires_profile_completion') {
-        navigate('/auth/google/completar-registro', {
-          replace: true,
-          state: {
-            registrationTicket: data.registrationTicket,
-            prefill: data.prefill,
-          },
-        })
+        navigate(
+          `/auth/google/completar-registro?ticket=${encodeURIComponent(data.registrationTicket!)}`,
+          { replace: true },
+        )
       }
 
       // requires_account_link: la page lee mutation.data para mostrar el alert
