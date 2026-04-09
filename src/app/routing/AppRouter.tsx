@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import { AuthShell } from '@/app/shells/AuthShell'
 import { AppShell } from '@/app/shells/AppShell'
+import { ErrorBoundary } from '@/shared/errors/ErrorBoundary'
 import { ProtectedRoute } from './ProtectedRoute'
 import { PublicOnlyRoute } from './PublicOnlyRoute'
 
@@ -41,7 +42,9 @@ export function AppRouter() {
           path="/auth"
           element={
             <PublicOnlyRoute>
-              <AuthShell />
+              <ErrorBoundary>
+                <AuthShell />
+              </ErrorBoundary>
             </PublicOnlyRoute>
           }
         >
@@ -61,7 +64,9 @@ export function AppRouter() {
           path="/app"
           element={
             <ProtectedRoute>
-              <AppShell />
+              <ErrorBoundary>
+                <AppShell />
+              </ErrorBoundary>
             </ProtectedRoute>
           }
         >

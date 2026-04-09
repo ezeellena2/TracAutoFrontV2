@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useTranslation } from 'react-i18next'
@@ -19,6 +18,7 @@ import { PasswordStrength } from '@/shared/ui/PasswordStrength'
 import { RegistroProgress } from './registro/RegistroProgress'
 import { StepContainer, StepNav, LoginLink } from '../components/StepLayout'
 import { resolveDocumentInputMode } from '@/shared/utils/document-input'
+import { useMultiStepUrl } from '@/shared/hooks/useMultiStepUrl'
 
 const TOTAL_STEPS = 4
 
@@ -30,7 +30,7 @@ const TOTAL_STEPS = 4
  */
 export function RegistroPage() {
   const { t } = useTranslation()
-  const [currentStep, setCurrentStep] = useState(1)
+  const { currentStep, goToStep, goBack } = useMultiStepUrl({ totalSteps: TOTAL_STEPS })
   const navigate = useNavigate()
 
   const form = useForm<RegistroFormData>({
@@ -68,7 +68,7 @@ export function RegistroPage() {
   async function validateAndAdvance(fields: (keyof RegistroFormData)[], nextStep: number) {
     const valid = await form.trigger(fields)
     if (valid) {
-      setCurrentStep(nextStep)
+      goToStep(nextStep)
     }
   }
 
@@ -98,7 +98,7 @@ export function RegistroPage() {
             }
             const firstField = Object.keys(fieldErrors)[0]
             if (firstField && fieldStepMap[firstField]) {
-              setCurrentStep(fieldStepMap[firstField])
+              goToStep(fieldStepMap[firstField])
             }
           }
         },
@@ -172,7 +172,7 @@ export function RegistroPage() {
             />
           </div>
           <StepNav>
-            <Button variant="secondary" onClick={() => setCurrentStep(1)}>
+            <Button variant="secondary" onClick={goBack}>
               {t('auth.registro.back')}
             </Button>
             <Button onClick={() => validateAndAdvance(['tipoDocumento', 'numeroDocumento'], 3)}>
@@ -208,7 +208,7 @@ export function RegistroPage() {
             {...form.register('confirmPassword')}
           />
           <StepNav>
-            <Button variant="secondary" onClick={() => setCurrentStep(2)}>
+            <Button variant="secondary" onClick={goBack}>
               {t('auth.registro.back')}
             </Button>
             <Button onClick={() => validateAndAdvance(['password', 'confirmPassword'], 4)}>
@@ -245,7 +245,7 @@ export function RegistroPage() {
             />
           </div>
           <StepNav>
-            <Button variant="secondary" onClick={() => setCurrentStep(3)}>
+            <Button variant="secondary" onClick={goBack}>
               {t('auth.registro.back')}
             </Button>
             <Button

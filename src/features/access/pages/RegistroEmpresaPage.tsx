@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useTranslation } from 'react-i18next'
@@ -23,6 +22,7 @@ import { RegistroProgress } from './registro/RegistroProgress'
 import { ModuleCard } from './registro-empresa/ModuleCard'
 import { StepContainer, StepNav, LoginLink } from '../components/StepLayout'
 import { resolveDocumentInputMode } from '@/shared/utils/document-input'
+import { useMultiStepUrl } from '@/shared/hooks/useMultiStepUrl'
 
 const TOTAL_STEPS = 4
 
@@ -43,7 +43,7 @@ const AVAILABLE_MODULES = [
  */
 export function RegistroEmpresaPage() {
   const { t } = useTranslation()
-  const [currentStep, setCurrentStep] = useState(1)
+  const { currentStep, goToStep, goBack } = useMultiStepUrl({ totalSteps: TOTAL_STEPS })
   const navigate = useNavigate()
 
   const form = useForm<RegistroEmpresaFormData>({
@@ -102,7 +102,7 @@ export function RegistroEmpresaPage() {
     nextStep: number,
   ) {
     const valid = await form.trigger(fields)
-    if (valid) setCurrentStep(nextStep)
+    if (valid) goToStep(nextStep)
   }
 
   function toggleModule(moduleId: string) {
@@ -256,7 +256,7 @@ export function RegistroEmpresaPage() {
             {...form.register('confirmPassword')}
           />
           <StepNav>
-            <Button variant="secondary" onClick={() => setCurrentStep(1)}>
+            <Button variant="secondary" onClick={goBack}>
               {t('auth.registro.back')}
             </Button>
             <Button onClick={() => validateAndAdvance(['password', 'confirmPassword'], 3)}>
@@ -292,7 +292,7 @@ export function RegistroEmpresaPage() {
             {...form.register('empresaRubro')}
           />
           <StepNav>
-            <Button variant="secondary" onClick={() => setCurrentStep(2)}>
+            <Button variant="secondary" onClick={goBack}>
               {t('auth.registro.back')}
             </Button>
             <Button
@@ -335,7 +335,7 @@ export function RegistroEmpresaPage() {
             </p>
           ) : null}
           <StepNav>
-            <Button variant="secondary" onClick={() => setCurrentStep(3)}>
+            <Button variant="secondary" onClick={goBack}>
               {t('auth.registro.back')}
             </Button>
             <Button

@@ -8,6 +8,7 @@ function getStrengthScore(password: string): number {
   let score = 0
   if (password.length >= 8) score++
   if (/[A-Z]/.test(password)) score++
+  if (/[a-z]/.test(password)) score++
   if (/\d/.test(password)) score++
   if (/[^A-Za-z0-9]/.test(password)) score++
   return score
@@ -15,16 +16,18 @@ function getStrengthScore(password: string): number {
 
 const strengthColors: Record<number, string> = {
   1: 'bg-[var(--color-danger)]',
-  2: 'bg-[var(--color-brand-amber)]',
+  2: 'bg-[var(--color-danger)]',
   3: 'bg-[var(--color-brand-amber)]',
-  4: 'bg-[var(--color-success)]',
+  4: 'bg-[var(--color-brand-amber)]',
+  5: 'bg-[var(--color-success)]',
 }
 
 const strengthTextColors: Record<number, string> = {
   1: 'text-[var(--color-danger)]',
-  2: 'text-[var(--color-brand-amber)]',
+  2: 'text-[var(--color-danger)]',
   3: 'text-[var(--color-brand-amber)]',
-  4: 'text-[var(--color-success)]',
+  4: 'text-[var(--color-brand-amber)]',
+  5: 'text-[var(--color-success)]',
 }
 
 /**
@@ -38,15 +41,16 @@ export function PasswordStrength({ password }: PasswordStrengthProps) {
   const labelKeys: Record<number, string> = {
     0: 'auth.registro.password.strengthEmpty',
     1: 'auth.registro.password.strengthWeak',
-    2: 'auth.registro.password.strengthFair',
-    3: 'auth.registro.password.strengthGood',
-    4: 'auth.registro.password.strengthExcellent',
+    2: 'auth.registro.password.strengthWeak',
+    3: 'auth.registro.password.strengthFair',
+    4: 'auth.registro.password.strengthGood',
+    5: 'auth.registro.password.strengthExcellent',
   }
 
   return (
     <div className="flex flex-col gap-1.5">
       <div className="flex gap-1">
-        {[1, 2, 3, 4].map((segment) => (
+        {[1, 2, 3, 4, 5].map((segment) => (
           <div
             key={segment}
             className={`h-1 flex-1 rounded-full transition-colors ${

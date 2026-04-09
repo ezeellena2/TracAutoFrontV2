@@ -255,6 +255,8 @@
       "passwordMinLength": "La contraseña debe tener al menos 8 caracteres",
       "passwordUppercase": "La contraseña debe tener al menos una mayuscula",
       "passwordDigit": "La contraseña debe tener al menos un numero",
+      "passwordLowercase": "La contraseña debe tener al menos una minuscula",
+      "passwordSpecialChar": "La contraseña debe tener al menos un caracter especial",
       "codigoVerificacionRequired": "El codigo de verificacion es obligatorio",
       "codigoVerificacionInvalid": "El codigo debe tener 6 digitos",
       "confirmPasswordRequired": "Confirma tu contraseña",
@@ -450,7 +452,9 @@
       "required": "La contraseña es obligatoria.",
       "min_length": "La contraseña debe tener al menos 8 caracteres.",
       "uppercase": "La contraseña debe tener al menos una mayuscula.",
-      "digit": "La contraseña debe tener al menos un numero."
+      "digit": "La contraseña debe tener al menos un numero.",
+      "lowercase": "La contraseña debe tener al menos una minuscula.",
+      "special_char": "La contraseña debe tener al menos un caracter especial."
     },
     "token": {
       "required": "El token es obligatorio."
@@ -566,6 +570,11 @@
     },
     "usuario_organizacion": {
       "ya_existe": "El usuario ya tiene acceso a esta organizacion."
+    },
+    "boundary": {
+      "title": "Algo salio mal",
+      "message": "Ocurrio un error inesperado. Podes intentar de nuevo.",
+      "retry": "Reintentar"
     }
   },
   "context": {

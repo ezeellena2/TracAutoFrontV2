@@ -255,6 +255,8 @@
       "passwordMinLength": "Password must be at least 8 characters",
       "passwordUppercase": "Password must contain at least one uppercase letter",
       "passwordDigit": "Password must contain at least one number",
+      "passwordLowercase": "Password must contain at least one lowercase letter",
+      "passwordSpecialChar": "Password must contain at least one special character",
       "codigoVerificacionRequired": "Verification code is required",
       "codigoVerificacionInvalid": "The code must contain 6 digits",
       "confirmPasswordRequired": "Please confirm your password",
@@ -434,7 +436,9 @@
       "required": "Password is required.",
       "min_length": "Password must be at least 8 characters.",
       "uppercase": "Password must contain at least one uppercase letter.",
-      "digit": "Password must contain at least one number."
+      "digit": "Password must contain at least one number.",
+      "lowercase": "Password must contain at least one lowercase letter.",
+      "special_char": "Password must contain at least one special character."
     },
     "token": {
       "required": "Token is required."
@@ -541,6 +545,11 @@
     },
     "usuario_organizacion": {
       "ya_existe": "The user already has access to this organization."
+    },
+    "boundary": {
+      "title": "Something went wrong",
+      "message": "An unexpected error occurred. You can try again.",
+      "retry": "Retry"
     }
   },
   "context": {

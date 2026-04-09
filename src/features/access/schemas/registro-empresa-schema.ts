@@ -28,7 +28,9 @@ export const registroEmpresaSchema = z
       .min(1, 'auth.errors.passwordRequired')
       .min(8, 'auth.errors.passwordMinLength')
       .regex(/[A-Z]/, 'auth.errors.passwordUppercase')
-      .regex(/\d/, 'auth.errors.passwordDigit'),
+      .regex(/[a-z]/, 'auth.errors.passwordLowercase')
+      .regex(/\d/, 'auth.errors.passwordDigit')
+      .regex(/[!@#$%^&*()\-_+=\[\]{}|;:',.<>?/]/, 'auth.errors.passwordSpecialChar'),
     confirmPassword: z.string().min(1, 'auth.errors.confirmPasswordRequired'),
 
     // Paso 3: empresa
