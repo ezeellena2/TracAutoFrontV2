@@ -517,10 +517,11 @@
     "validation": {
       "failed": "Revisa los datos del formulario e intenta nuevamente."
     },
-    "auth": {
-      "credenciales_invalidas": "Email o contraseña incorrectos.",
-      "cuenta_bloqueada": "Tu cuenta esta bloqueada temporalmente. Intenta mas tarde.",
-      "token_expirado": "Tu sesion expiro. Inicia sesion nuevamente.",
+      "auth": {
+        "credenciales_invalidas": "Email o contraseña incorrectos.",
+        "cuenta_bloqueada": "Tu cuenta esta bloqueada temporalmente. Intenta mas tarde.",
+        "email_no_verificado": "Debes verificar tu email antes de iniciar sesion.",
+        "token_expirado": "Tu sesion expiro. Inicia sesion nuevamente.",
       "token_invalido": "Tu sesion no es valida.",
       "token_requerido": "Se requiere refresh token para continuar.",
       "token_reutilizado": "La sesion fue invalidada por seguridad.",

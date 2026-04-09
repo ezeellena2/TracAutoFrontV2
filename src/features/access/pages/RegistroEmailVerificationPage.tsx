@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Link, Navigate, useNavigate, useSearchParams } from 'react-router-dom'
@@ -107,19 +107,13 @@ export function RegistroEmailVerificationPage() {
     return resolveApiErrorMessage(parseApiError(reenviarMutation.error), t)
   })()
 
-  const resendLabel = useMemo(() => {
-    if (reenviarMutation.isPending) {
-      return t('common.loading')
-    }
-
-    if (resendCountdown > 0) {
-      return t('auth.emailVerification.resendCountdown', {
-        seconds: resendCountdown,
-      })
-    }
-
-    return t('auth.emailVerification.resend')
-  }, [reenviarMutation.isPending, resendCountdown, t])
+  const resendLabel = reenviarMutation.isPending
+    ? t('common.loading')
+    : resendCountdown > 0
+      ? t('auth.emailVerification.resendCountdown', {
+          seconds: resendCountdown,
+        })
+      : t('auth.emailVerification.resend')
 
   function handleVerify() {
     form.handleSubmit((data) => {

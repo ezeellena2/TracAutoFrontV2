@@ -498,10 +498,11 @@
     "validation": {
       "failed": "Review the form data and try again."
     },
-    "auth": {
-      "credenciales_invalidas": "Incorrect email or password.",
-      "cuenta_bloqueada": "Your account is temporarily locked. Try again later.",
-      "token_expirado": "Your session has expired. Sign in again.",
+      "auth": {
+        "credenciales_invalidas": "Incorrect email or password.",
+        "cuenta_bloqueada": "Your account is temporarily locked. Try again later.",
+        "email_no_verificado": "You must verify your email before signing in.",
+        "token_expirado": "Your session has expired. Sign in again.",
       "token_invalido": "Your session is no longer valid.",
       "token_requerido": "A refresh token is required to continue.",
       "token_reutilizado": "The session was invalidated for security reasons.",
