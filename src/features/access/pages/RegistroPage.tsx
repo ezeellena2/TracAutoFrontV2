@@ -18,6 +18,7 @@ import { Alert } from '@/shared/ui/Alert'
 import { PasswordStrength } from '@/shared/ui/PasswordStrength'
 import { RegistroProgress } from './registro/RegistroProgress'
 import { StepContainer, StepNav, LoginLink } from '../components/StepLayout'
+import { resolveDocumentInputMode } from '@/shared/utils/document-input'
 
 const TOTAL_STEPS = 4
 
@@ -48,6 +49,7 @@ export function RegistroPage() {
   })
 
   const registroMutation = useRegistro()
+  const documentType = useWatch({ control: form.control, name: 'tipoDocumento' })
 
   const generalError = (() => {
     if (!registroMutation.error) return null
@@ -159,6 +161,11 @@ export function RegistroPage() {
               type="text"
               placeholder={t('auth.registro.examples.docNumber')}
               className="font-mono"
+              autoComplete="off"
+              inputMode={resolveDocumentInputMode(documentType)}
+              spellCheck={false}
+              autoCorrect="off"
+              autoCapitalize="none"
               error={form.formState.errors.numeroDocumento?.message
                 ? t(form.formState.errors.numeroDocumento.message) : undefined}
               {...form.register('numeroDocumento')}

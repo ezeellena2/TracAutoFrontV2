@@ -22,6 +22,7 @@ import { Select } from '@/shared/ui/Select'
 import { Button } from '@/shared/ui/Button'
 import { Alert } from '@/shared/ui/Alert'
 import { PasswordStrength } from '@/shared/ui/PasswordStrength'
+import { resolveDocumentInputMode } from '@/shared/utils/document-input'
 
 type InviteTab = 'login' | 'register'
 
@@ -233,6 +234,7 @@ function InviteRegisterForm({
   })
 
   const passwordValue = useWatch({ control: form.control, name: 'password' })
+  const documentType = useWatch({ control: form.control, name: 'tipoDocumento' })
 
   const docTypeOptions = [
     { value: 'dni', label: t('auth.registro.docTypes.dni') },
@@ -302,6 +304,11 @@ function InviteRegisterForm({
           label={t('auth.registro.docNumberLabel')}
           placeholder={t('auth.invitacion.examples.docNumber')}
           className="font-mono"
+          autoComplete="off"
+          inputMode={resolveDocumentInputMode(documentType)}
+          spellCheck={false}
+          autoCorrect="off"
+          autoCapitalize="none"
           error={form.formState.errors.numeroDocumento?.message
             ? t(form.formState.errors.numeroDocumento.message) : undefined}
           {...form.register('numeroDocumento')}

@@ -49,6 +49,10 @@
   "common": {
     "loading": "Loading...",
     "brandPlatform": "web platform",
+    "passwordVisibility": {
+      "show": "Show password",
+      "hide": "Hide password"
+    },
     "theme": {
       "toggle": "Toggle theme",
       "dark": "Dark mode",

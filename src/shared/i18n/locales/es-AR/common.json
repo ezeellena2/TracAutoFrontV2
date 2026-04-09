@@ -49,6 +49,10 @@
   "common": {
     "loading": "Cargando...",
     "brandPlatform": "plataforma web",
+    "passwordVisibility": {
+      "show": "Mostrar contraseña",
+      "hide": "Ocultar contraseña"
+    },
     "theme": {
       "toggle": "Cambiar tema",
       "dark": "Modo oscuro",

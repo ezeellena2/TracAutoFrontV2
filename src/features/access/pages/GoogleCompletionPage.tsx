@@ -20,6 +20,7 @@ import { Select } from '@/shared/ui/Select'
 import { Button } from '@/shared/ui/Button'
 import { Alert } from '@/shared/ui/Alert'
 import { PasswordStrength } from '@/shared/ui/PasswordStrength'
+import { resolveDocumentInputMode } from '@/shared/utils/document-input'
 import type { GooglePrefill } from '@/services/contracts/auth'
 
 const TOTAL_STEPS = 3
@@ -117,6 +118,7 @@ function GoogleCompletionForm({
   })
 
   const completionMutation = useGoogleCompleteRegistration()
+  const documentType = useWatch({ control: form.control, name: 'tipoDocumento' })
 
   const generalError = (() => {
     if (!completionMutation.error) return null
@@ -221,6 +223,11 @@ function GoogleCompletionForm({
               type="text"
               placeholder={t('auth.registro.examples.docNumber')}
               className="font-mono"
+              autoComplete="off"
+              inputMode={resolveDocumentInputMode(documentType)}
+              spellCheck={false}
+              autoCorrect="off"
+              autoCapitalize="none"
               error={
                 form.formState.errors.numeroDocumento?.message
                   ? t(form.formState.errors.numeroDocumento.message)

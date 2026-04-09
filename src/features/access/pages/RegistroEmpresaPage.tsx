@@ -22,6 +22,7 @@ import { PasswordStrength } from '@/shared/ui/PasswordStrength'
 import { RegistroProgress } from './registro/RegistroProgress'
 import { ModuleCard } from './registro-empresa/ModuleCard'
 import { StepContainer, StepNav, LoginLink } from '../components/StepLayout'
+import { resolveDocumentInputMode } from '@/shared/utils/document-input'
 
 const TOTAL_STEPS = 4
 
@@ -76,6 +77,7 @@ export function RegistroEmpresaPage() {
 
   const passwordValue = useWatch({ control: form.control, name: 'password' })
   const selectedModules = useWatch({ control: form.control, name: 'modulos' })
+  const documentType = useWatch({ control: form.control, name: 'tipoDocumento' })
 
   const docTypeOptions = [
     { value: 'dni', label: t('auth.registro.docTypes.dni') },
@@ -205,6 +207,11 @@ export function RegistroEmpresaPage() {
               label={t('auth.registro.docNumberLabel')}
               placeholder={t('auth.registroEmpresa.examples.docNumber')}
               className="font-mono"
+              autoComplete="off"
+              inputMode={resolveDocumentInputMode(documentType)}
+              spellCheck={false}
+              autoCorrect="off"
+              autoCapitalize="none"
               error={fieldError(form, 'numeroDocumento', t)}
               {...form.register('numeroDocumento')}
             />
