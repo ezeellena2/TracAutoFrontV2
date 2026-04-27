@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { AuthShell } from '@/app/shells/AuthShell'
 import { AppShell } from '@/app/shells/AppShell'
 import { ErrorBoundary } from '@/shared/errors/ErrorBoundary'
@@ -22,14 +23,16 @@ import { RestablecerPasswordPage } from '@/features/access/pages/RestablecerPass
 import { DashboardPage } from '@/features/shell/pages/DashboardPage'
 import { ContextSelectorPage } from '@/features/context/pages/ContextSelectorPage'
 
-/**
- * Router principal con 4 zonas:
- *
- * /              → LandingPage (publica, marketing)
- * /auth/*        → AuthShell (login, registro) — solo si NO autenticado
- * /app/*         → AppShell (protegido) — verifica sesion al entrar
- * /*             → fallback a landing
- */
+function AppComingSoonPage() {
+  const { t } = useTranslation()
+  return (
+    <div className="flex flex-col items-center justify-center py-24 text-center">
+      <p className="text-base font-medium text-text-primary">{t('shell.placeholder.title')}</p>
+      <p className="mt-2 text-sm text-text-tertiary">{t('shell.placeholder.comingSoon')}</p>
+    </div>
+  )
+}
+
 export function AppRouter() {
   return (
     <BrowserRouter>
@@ -72,7 +75,30 @@ export function AppRouter() {
         >
           <Route index element={<DashboardPage />} />
           <Route path="selector" element={<ContextSelectorPage />} />
-          {/* Rutas de modulos se agregan aca en slices posteriores */}
+
+          {/* Flota */}
+          <Route path="flota/mapa" element={<AppComingSoonPage />} />
+          <Route path="flota/vehiculos" element={<AppComingSoonPage />} />
+          <Route path="flota/dispositivos" element={<AppComingSoonPage />} />
+          <Route path="flota/conductores" element={<AppComingSoonPage />} />
+          <Route path="flota/geozonas" element={<AppComingSoonPage />} />
+
+          {/* Configuracion */}
+          <Route path="configuracion/empresa" element={<AppComingSoonPage />} />
+          <Route path="configuracion/modulos" element={<AppComingSoonPage />} />
+          <Route path="configuracion/facturacion" element={<AppComingSoonPage />} />
+          <Route path="configuracion/notificaciones" element={<AppComingSoonPage />} />
+          <Route path="configuracion/integraciones" element={<AppComingSoonPage />} />
+          <Route path="configuracion/seguridad" element={<AppComingSoonPage />} />
+          <Route path="configuracion/apariencia" element={<AppComingSoonPage />} />
+          <Route path="configuracion/roles" element={<AppComingSoonPage />} />
+
+          {/* Sistema */}
+          <Route path="usuarios" element={<AppComingSoonPage />} />
+          <Route path="perfil" element={<AppComingSoonPage />} />
+
+          {/* Catch-all dentro de /app */}
+          <Route path="*" element={<AppComingSoonPage />} />
         </Route>
 
         <Route path="/reset-password" element={<LegacyResetPasswordRedirect />} />
@@ -86,6 +112,5 @@ export function AppRouter() {
 
 function LegacyResetPasswordRedirect() {
   const location = useLocation()
-
   return <Navigate to={`/auth/restablecer-password${location.search}`} replace />
 }

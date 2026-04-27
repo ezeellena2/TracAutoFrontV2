@@ -595,5 +595,119 @@
       "contextPersonal": "Contexto personal",
       "contextEmpresa": "Contexto empresa: {{org}}"
     }
+  },
+  "shell": {
+    "nav": {
+      "modulos": "Módulos",
+      "sistema": "Sistema",
+      "dashboard": "Dashboard",
+      "flota": "Telemetría y flota",
+      "flotaMapa": "Mapa en vivo",
+      "flotaVehiculos": "Vehículos",
+      "flotaDispositivos": "Dispositivos",
+      "flotaConductores": "Conductores",
+      "flotaGeozonas": "Geozonas",
+      "configuracion": "Configuración",
+      "confEmpresa": "Empresa",
+      "confModulos": "Módulos",
+      "confFacturacion": "Facturación",
+      "confNotificaciones": "Notificaciones",
+      "confIntegraciones": "Integraciones",
+      "confSeguridad": "Seguridad",
+      "confApariencia": "Apariencia",
+      "confRoles": "Roles y permisos",
+      "usuarios": "Usuarios"
+    },
+    "sidebar": {
+      "collapse": "Colapsar menú",
+      "expand": "Expandir menú"
+    },
+    "orgSwitcher": {
+      "changeLabel": "Cambiar espacio",
+      "changeOrg": "Cambiar organización",
+      "personal": "Cuenta personal",
+      "empresa": "Empresa"
+    },
+    "header": {
+      "notifications": "Notificaciones",
+      "changeContext": "Cambiar contexto",
+      "logout": "Cerrar sesión"
+    },
+    "dashboard": {
+      "title": "Telemetría y flota",
+      "addVehicle": "Agregar vehículo",
+      "mapPlaceholder": "Flota en tiempo real",
+      "mapEmpty": "Sin posiciones disponibles",
+      "alertsTitle": "Alertas recientes",
+      "emptyAlerts": "Sin alertas activas",
+      "vehiclesTitle": "Vehículos",
+      "emptyVehicles": "No hay vehículos cargados",
+      "kpi": {
+        "totalVehiculos": "Total vehículos",
+        "enLinea": "En línea",
+        "alertasAbiertas": "Alertas abiertas",
+        "conDispositivo": "Con dispositivo GPS",
+        "conductoresActivos": "Conductores activos",
+        "licenciasPorVencer": "Licencias por vencer",
+        "geozonas": "Geozonas activas",
+        "mantenimientos": "Mantenimientos pendientes"
+      },
+      "onboarding": {
+        "kicker": "Configuración inicial",
+        "title": "Configurá tu flota en 3 pasos",
+        "subtitle": "Creá tu primer vehículo, asociá un dispositivo GPS y asigná un conductor. Los pasos 2 y 3 son opcionales — podés completarlos más adelante desde el menú de Flota.",
+        "step1Label": "Primer vehículo",
+        "step2Label": "Dispositivo GPS",
+        "step3Label": "Conductor",
+        "optional": "opcional",
+        "step1Title": "1. Primer vehículo",
+        "step1Desc": "Datos básicos de tu primer vehículo. Una vez creado podés asociar dispositivo y conductor.",
+        "step2Title": "2. Dispositivo GPS",
+        "step2Desc": "Asociá un dispositivo GPS al vehículo para empezar a rastrearlo. Si todavía no tenés uno, saltá este paso.",
+        "step3Title": "3. Conductor",
+        "step3Desc": "Asigná un conductor al vehículo. Podés cargar sus datos o invitarlo por email.",
+        "cancel": "Cancelar",
+        "skip": "Saltar este paso",
+        "skipFinish": "Saltar y finalizar",
+        "createVehicle": "Crear vehículo y continuar →",
+        "assignDevice": "Asociar dispositivo y continuar →",
+        "finish": "Finalizar configuración →",
+        "selectBrand": "Elegir marca",
+        "selectType": "Elegir tipo",
+        "selectGpsModel": "Elegir modelo",
+        "selectLicense": "Elegir categoría",
+        "patenteLabel": "Patente",
+        "patentePlaceholder": "AB 123 CD",
+        "marcaLabel": "Marca",
+        "modeloLabel": "Modelo",
+        "modeloPlaceholder": "Transit, Hilux, Kangoo...",
+        "anioLabel": "Año",
+        "anioPlaceholder": "2024",
+        "tipoLabel": "Tipo",
+        "imeiLabel": "IMEI del dispositivo",
+        "imeiPlaceholder": "353456789012345",
+        "dispModeloLabel": "Modelo GPS",
+        "simLabel": "Número de SIM",
+        "simPlaceholder": "+54 11 ...",
+        "condNombreLabel": "Nombre",
+        "condNombrePlaceholder": "Carlos",
+        "condApellidoLabel": "Apellido",
+        "condApellidoPlaceholder": "Méndez",
+        "condDniLabel": "DNI",
+        "condDniPlaceholder": "32.456.789",
+        "condEmailLabel": "Email (para invitar)",
+        "condEmailPlaceholder": "carlos@empresa.com",
+        "condLicenciaLabel": "Categoría de licencia"
+      }
+    },
+    "placeholder": {
+      "title": "Sección en construcción",
+      "comingSoon": "Próximamente disponible."
+    }
+  },
+  "validation": {
+    "required": "Este campo es obligatorio",
+    "yearMin": "El año debe ser mayor a 1990",
+    "yearMax": "El año no puede superar 2030"
   }
 }

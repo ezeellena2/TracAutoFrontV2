@@ -26,6 +26,11 @@
 :root {
   color-scheme: dark;
 
+  /* Shell dimensions */
+  --sidebar-width: 240px;
+  --sidebar-collapsed-width: 60px;
+  --header-height: 56px;
+
   /* Mockup tokens — used by landing and shared styles */
   --bg-base: #080B14;
   --surface-1: #0F1420;
