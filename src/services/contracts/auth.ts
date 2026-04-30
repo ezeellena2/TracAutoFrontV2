@@ -39,6 +39,8 @@ export interface OrganizacionDisponible {
   tipoOrganizacion: string
   rol: string
   esMicroOrg: boolean
+  modulos: string[]
+  permisos: string[]
 }
 
 // --- Requests ---
