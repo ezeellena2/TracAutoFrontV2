@@ -11,8 +11,8 @@ import {
   hasApiFieldErrors,
   parseApiError,
   resolveApiErrorMessage,
-  resolveApiFieldErrors,
 } from '@/shared/errors/parse-api-error'
+import { aplicarErroresDeCampo } from '@/shared/forms/aplicar-errores-de-campo'
 import { Input } from '@/shared/ui/legacy/Input'
 import { Button } from '@/shared/ui/legacy/Button'
 import { Alert } from '@/shared/ui/legacy/Alert'
@@ -76,15 +76,7 @@ export function LoginPage() {
     loginMutation.mutate(data, {
       onError: (error) => {
         // Mapear errores de validacion del backend a campos del form
-        const apiError = parseApiError(error)
-        const fieldErrors = resolveApiFieldErrors(apiError, t)
-        if (Object.keys(fieldErrors).length > 0) {
-          Object.entries(fieldErrors).forEach(([field, message]) => {
-            form.setError(field as keyof LoginFormData, {
-              message,
-            })
-          })
-        }
+        aplicarErroresDeCampo(form, error, t)
       },
     })
   }

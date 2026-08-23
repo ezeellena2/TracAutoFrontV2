@@ -1,4 +1,3 @@
-import { Lock } from 'lucide-react'
 import { Boton } from '@/shared/ui/Boton'
 import { Icono } from '@/shared/ui/Icono'
 import { cn } from '@/shared/utils/cn'
@@ -55,7 +54,7 @@ export function SinAccesoOverlay({
     >
       <div className="flex max-w-md flex-col items-center gap-3 rounded-xl border border-borde bg-vidrio px-8 py-10 text-center shadow-xl">
         <span className="flex size-12 items-center justify-center rounded-full bg-superficie-2 text-fg-secundario">
-          <Icono icono={Lock} tamano="lg" />
+          <Icono nombre="bloqueado" tamano="lg" />
         </span>
         <p className="text-lg font-semibold tracking-snug text-fg-primario">{titulo}</p>
         <p className="text-sm text-fg-secundario">{descripcion}</p>

@@ -1,3 +1,25 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+ * EDITADO RESPECTO DEL UPSTREAM DE shadcn/ui — declarado acá para que la
+ * próxima re-copia (`shadcn add tabs --overwrite`) sea un diff legible y no
+ * una arqueología (02-primitivas.md §1.6 y §13).
+ *
+ * NO se cambió nada del upstream. Encabezado para dejar escrito por qué las
+ * tres medidas arbitrarias de este archivo se MIRARON en F-04a y se dejaron:
+ *
+ *   `h-‹calc(100%-1px)›` (línea del trigger): compensa el borde de 1px de la
+ *     lista para que la pestaña activa no se coma la línea. Anatomía.
+ *   `p-‹3px›` (padding de la lista): es el aire entre el borde de la lista y la
+ *     pastilla activa. Es DENSIDAD, y este slice declara explícitamente que no
+ *     tokeniza densidad: eso entra cuando se tokenice la primera estética de
+ *     verdad, con más de un caso a la vista.
+ *   `bottom-‹-5px›` (subrayado de la variante `line`): posición del indicador.
+ *     Anatomía del componente, no geometría de marca.
+ *
+ * Los tres son cálculos de ANATOMÍA: una estética que los cambiara estaría
+ * reestructurando el componente, que es justo lo que el límite 2 de
+ * `11-catalogo-de-esteticas.md` prohíbe.
+ * ───────────────────────────────────────────────────────────────────────────── */
+
 import { Tabs as TabsPrimitive } from "@base-ui/react/tabs"
 import { cva, type VariantProps } from "class-variance-authority"
 

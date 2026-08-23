@@ -1,7 +1,7 @@
-import { X } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { Boton } from '@/shared/ui/Boton'
 import { BotonIcono } from '@/shared/ui/BotonIcono'
+import { ICONOS } from '@/shared/ui/iconos'
 import { Spinner } from '@/shared/ui/Spinner'
 import { cn } from '@/shared/utils/cn'
 
@@ -93,7 +93,7 @@ export function BarraMasiva({
       <BotonIcono
         variante="fantasma"
         tamano="sm"
-        icono={X}
+        icono={ICONOS.cerrar}
         etiqueta={textos?.limpiar ?? 'Limpiar selección'}
         deshabilitado={enCurso}
         onClick={onLimpiar}

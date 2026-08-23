@@ -19,11 +19,18 @@ import type { CrearVehiculoFormulario } from '../../schemas/crear-vehiculo'
  * **texto** (`marca`/`modelo`). No es redundancia: el Canónico guarda el id para decidir y el texto
  * para mostrar, y el texto es lo único que sobrevive cuando el catálogo no cubre el vehículo.
  *
- * **El modelo degrada a texto libre a propósito.** Si la marca elegida no tiene modelos en el
- * catálogo —el caso NORMAL hasta que se cargue el dataset (DA-CAT-02)— se muestra un input de texto
- * en vez de un select vacío que trabaría el alta. Un vehículo real que el catálogo todavía no tiene
- * DEBE poder cargarse: la identidad por texto libre es un estado válido del modelo canónico, no un
- * error. Lo que NO se hace es inventar opciones: si el catálogo está vacío, se dice.
+ * **Los DOS degradan a texto libre a propósito.** Si el catálogo no cubre el vehículo —marca sin
+ * cargar, o marca elegida sin modelos— se muestra un input de texto en vez de un select vacío que
+ * trabaría el alta. Un vehículo real que el catálogo todavía no tiene DEBE poder cargarse: la
+ * identidad por texto libre es un estado válido del modelo canónico, no un error, y el propio schema
+ * lo dice al no exigir `marcaId`/`modeloId`. Lo que NO se hace es inventar opciones: si el catálogo
+ * está vacío, se dice.
+ *
+ * ⚠️ **La marca NO tenía este fallback y eso bloqueaba el alta entera** (corregido el 2026-08-22).
+ * `marca` es requerida en el schema y su texto se escribía únicamente dentro del `onCambio` del
+ * select — que con cero opciones **no puede dispararse nunca**. Con el catálogo vacío el formulario
+ * no validaba y el wizard no se podía completar, sin ningún mensaje que explicara por qué. La
+ * asimetría estaba en este mismo archivo: `modelo` degradaba y `marca` no.
  *
  * Flota llega hasta acá y no sigue: los pasos 3 (año) y 4 (versión/trim) de la cascada NO se piden.
  * Nadie en una flota conoce el trim exacto de sus unidades, y exigirlo sería pedir un dato que el
@@ -44,6 +51,10 @@ export function CampoMarcaYModelo({
   const marcaId = useWatch({ control: form.control, name: 'marcaId' })
   const modelos = useCatalogoModelos(marcaId)
 
+  const opcionesMarca = marcas.data?.items ?? []
+  // Mismo criterio que abajo para modelo: sin opciones, la única salida honesta es el texto libre.
+  const hayMarcasEnCatalogo = opcionesMarca.length > 0
+
   const opcionesModelo = modelos.data?.items ?? []
   // Sin marca elegida no hay a quién pedirle modelos; con marca pero sin modelos en el catálogo, la
   // única salida honesta es el texto libre. Los dos casos caen al input, con ayudas distintas.
@@ -51,36 +62,54 @@ export function CampoMarcaYModelo({
 
   return (
     <div className="grid gap-4 sm:grid-cols-2">
-      <Controller
-        control={form.control}
-        name="marcaId"
-        render={({ field, fieldState }) => (
-          <CampoSelectCatalogo
-            etiqueta={t('flota:onboarding.campos.marca')}
-            opciones={(marcas.data?.items ?? []).map((marca) => ({
-              valor: marca.id,
-              etiqueta: marca.nombre,
-            }))}
-            valor={field.value}
-            onCambio={(valor) => {
-              field.onChange(valor)
-              // El TEXTO se guarda aparte: es lo que viaja al backend y lo que queda si mañana el
-              // catálogo cambia. Se resuelve del listado que ya está en mano, sin pedir nada.
-              const elegida = (marcas.data?.items ?? []).find((marca) => marca.id === valor)
-              form.setValue('marca', elegida?.nombre ?? '', { shouldValidate: true })
-              // Cambiar de marca invalida el modelo: los modelos son DE una marca. Dejarlo sería
-              // mandar "Ford Corolla" sin que nada lo frene.
-              form.setValue('modelo', '')
-              form.setValue('modeloId', '')
-            }}
-            cargando={marcas.isPending}
-            fallo={marcas.isError}
-            error={mensajeDe(fieldState.error) ?? mensajeDe(form.formState.errors.marca)}
-            placeholder={t('flota:onboarding.campos.marcaPlaceholder')}
-            avisoVacio={t('flota:onboarding.catalogo.marcasVacias')}
-          />
-        )}
-      />
+      {hayMarcasEnCatalogo ? (
+        <Controller
+          control={form.control}
+          name="marcaId"
+          render={({ field, fieldState }) => (
+            <CampoSelectCatalogo
+              etiqueta={t('flota:onboarding.campos.marca')}
+              opciones={opcionesMarca.map((marca) => ({
+                valor: marca.id,
+                etiqueta: marca.nombre,
+              }))}
+              valor={field.value}
+              onCambio={(valor) => {
+                field.onChange(valor)
+                // El TEXTO se guarda aparte: es lo que viaja al backend y lo que queda si mañana el
+                // catálogo cambia. Se resuelve del listado que ya está en mano, sin pedir nada.
+                const elegida = opcionesMarca.find((marca) => marca.id === valor)
+                form.setValue('marca', elegida?.nombre ?? '', { shouldValidate: true })
+                // Cambiar de marca invalida el modelo: los modelos son DE una marca. Dejarlo sería
+                // mandar "Ford Corolla" sin que nada lo frene.
+                form.setValue('modelo', '')
+                form.setValue('modeloId', '')
+              }}
+              cargando={marcas.isPending}
+              fallo={marcas.isError}
+              error={mensajeDe(fieldState.error) ?? mensajeDe(form.formState.errors.marca)}
+              placeholder={t('flota:onboarding.campos.marcaPlaceholder')}
+              avisoVacio={t('flota:onboarding.catalogo.marcasVacias')}
+            />
+          )}
+        />
+      ) : (
+        <Campo
+          etiqueta={t('flota:onboarding.campos.marca')}
+          requerido
+          ayuda={t('flota:onboarding.catalogo.marcaTextoLibre')}
+          error={mensajeDe(form.formState.errors.marca)}
+        >
+          {(control) => (
+            <Input
+              {...control}
+              {...form.register('marca')}
+              maxLength={50}
+              invalido={form.formState.errors.marca !== undefined}
+            />
+          )}
+        </Campo>
+      )}
 
       {hayModelosEnCatalogo ? (
         <Controller

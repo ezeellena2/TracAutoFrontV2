@@ -38,6 +38,28 @@ const RED = {
     'F10: el HTTP vive centralizado en services/. Una pantalla que llama a la red por su cuenta se saltea el interceptor de sesión (token, refresh) y el tenant.',
 }
 
+/**
+ * R-IC-2 — los glifos de lucide se piden por CONCEPTO al catálogo, no por nombre a la librería.
+ *
+ * `LucideIcon` queda permitido: es el TIPO que las primitivas necesitan en su firma (`Boton`,
+ * `Badge`, `EstadoVacio`, `MenuAcciones`…). Se permite el tipo y se prohíben los dibujos.
+ */
+const LUCIDE = {
+  name: 'lucide-react',
+  allowImportNames: ['LucideIcon'],
+  message:
+    'R-IC-2: el ícono se pide por CONCEPTO al catálogo (@/shared/ui/iconos), no por nombre a lucide. Dos pantallas que muestran "vehículo" con glifos distintos le enseñan al usuario que son cosas distintas. Los conceptos están en 12-estandar-de-iconos.md §4-§7; para agregar uno, §9.',
+}
+
+/** La frontera de `shared/`: se declara una vez para que sus dos bloques no puedan divergir. */
+const FRONTERA_SHARED = [
+  {
+    group: ['@/features/*', '@/features/*/**', '@/modules/*', '@/modules/*/**', '@/app/*', '@/app/*/**'],
+    message:
+      'F9: shared/ está abajo de todo en el grafo de dependencias, y es la única carpeta que 12 módulos van a tocar a la vez. Si acepta features o dominio, se convierte en el basurero central y cambiar algo ahí rompe módulos al azar.',
+  },
+]
+
 export default defineConfig([
   globalIgnores(['dist', 'storybook-static', 'playwright-report', 'test-results', 'coverage']),
 
@@ -112,7 +134,7 @@ export default defineConfig([
     files: ['src/**/*.{ts,tsx}'],
     ignores: ['src/services/**'],
     rules: {
-      'no-restricted-imports': ['error', { paths: [RED] }],
+      'no-restricted-imports': ['error', { paths: [RED, LUCIDE] }],
       'no-restricted-globals': [
         'error',
         {
@@ -134,7 +156,7 @@ export default defineConfig([
       'no-restricted-imports': [
         'error',
         {
-          paths: [RED],
+          paths: [RED, LUCIDE],
           patterns: [
             {
               group: ['@/modules/*', '@/modules/*/**'],
@@ -157,7 +179,7 @@ export default defineConfig([
       'no-restricted-imports': [
         'error',
         {
-          paths: [RED],
+          paths: [RED, LUCIDE],
           patterns: [
             {
               group: ['@/modules/*', '@/modules/*/**'],
@@ -172,19 +194,7 @@ export default defineConfig([
   {
     files: ['src/shared/**/*.{ts,tsx}'],
     rules: {
-      'no-restricted-imports': [
-        'error',
-        {
-          paths: [RED],
-          patterns: [
-            {
-              group: ['@/features/*', '@/features/*/**', '@/modules/*', '@/modules/*/**', '@/app/*', '@/app/*/**'],
-              message:
-                'F9: shared/ está abajo de todo en el grafo de dependencias, y es la única carpeta que 12 módulos van a tocar a la vez. Si acepta features o dominio, se convierte en el basurero central y cambiar algo ahí rompe módulos al azar.',
-            },
-          ],
-        },
-      ],
+      'no-restricted-imports': ['error', { paths: [RED, LUCIDE], patterns: FRONTERA_SHARED }],
     },
   },
   {
@@ -193,6 +203,7 @@ export default defineConfig([
       'no-restricted-imports': [
         'error',
         {
+          paths: [LUCIDE],
           patterns: [
             {
               group: ['@/features/*', '@/features/*/**', '@/modules/*', '@/modules/*/**', '@/app/*', '@/app/*/**'],
@@ -202,6 +213,25 @@ export default defineConfig([
           ],
         },
       ],
+    },
+  },
+
+  // ── R-IC-2 · las dos carpetas exentas ────────────────────────────────────
+  // `iconos/` ES el puente: es el archivo que traduce concepto → glifo, así que
+  // tiene que importar lucide o no existiría. `base/` son copias literales del
+  // CLI de shadcn: sus imports vuelven en cada `shadcn add --overwrite`, y
+  // editarlos convertiría la re-copia en un merge.
+  //
+  // ⚠️ NOTA DE ORDEN — es el mismo aviso que el encabezado de este archivo: en
+  // flat config dos bloques que declaran la MISMA regla no se fusionan, gana el
+  // ÚLTIMO que matchea. Por eso este bloque va al final (para ganarle al de
+  // `src/shared/**`) y por eso repite `RED` y `FRONTERA_SHARED`: si solo
+  // declarara la excepción de lucide, apagaría F10 y F9 en estas dos carpetas
+  // sin que nada avisara.
+  {
+    files: ['src/shared/ui/iconos/**/*.{ts,tsx}', 'src/shared/ui/base/**/*.{ts,tsx}'],
+    rules: {
+      'no-restricted-imports': ['error', { paths: [RED], patterns: FRONTERA_SHARED }],
     },
   },
 

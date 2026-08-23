@@ -242,13 +242,22 @@
      (02-primitivas.md §1.4, recuadro "trampa concreta"). */
   --radius: var(--s-radio-lg);
 
-  /* Los componentes de shadcn leen la escala de radios DENTRO de una clase
-     arbitraria: `rounded-[min(var(--radius-md),10px)]`. Y `@theme inline` no
-     emite ninguna variable en `:root` (es exactamente lo que hace que el tema
-     cambie), así que `var(--radius-md)` quedaría SIN DEFINIR y el redondeo se
-     perdería en silencio. Se declaran acá como variables planas — con LOS
-     VALORES DE ORBI, no con el bloque `calc()` de shadcn, que es lo que la
-     trampa de arriba prohíbe. */
+  /* Los componentes que copia `shadcn add` leen la escala de radios DENTRO de
+     una clase arbitraria (un `min()` sobre la variable, con un techo en px). Y
+     `@theme inline` no emite ninguna variable en `:root` —es exactamente lo que
+     hace que el tema cambie—, así que esa variable quedaría SIN DEFINIR y el
+     redondeo se perdería en silencio. Se declaran acá como variables planas —
+     con LOS VALORES DE ORBI, no con el bloque `calc()` de shadcn, que es lo que
+     la trampa de arriba prohíbe.
+
+     ⚠️ PRECISADO EN F-04a: hoy **ningún componente del repo las lee así**. Las
+     4 clases con techo de `button.tsx` y la de `select.tsx` se reemplazaron por
+     `rounded-md`, porque el techo capeaba el token: una estética que subiera
+     `--s-radio-md` por encima de 10px dejaba esos controles clavados, sin error
+     ni aviso. Estas declaraciones **se quedan igual** y no son código muerto:
+     `shadcn add <x> --overwrite` vuelve a traer el patrón cada vez que se
+     re-copia un componente, y sin ellas el redondeo se caería en silencio otra
+     vez. Son la red de esa re-copia, no una dependencia viva. */
   --radius-sm: var(--s-radio-sm);
   --radius-md: var(--s-radio-md);
   --radius-lg: var(--s-radio-lg);

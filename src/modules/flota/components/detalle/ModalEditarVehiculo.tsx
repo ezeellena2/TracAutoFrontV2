@@ -12,8 +12,8 @@ import {
   hasApiFieldErrors,
   parseApiError,
   resolveApiErrorMessage,
-  resolveApiFieldErrors,
 } from '@/shared/errors/parse-api-error'
+import { aplicarErroresDeCampo } from '@/shared/forms/aplicar-errores-de-campo'
 import type { VehiculoDetalleDto } from '@/services/contracts/flota'
 import { AvisoCamposNoBorrables } from '../AvisoCamposNoBorrables'
 import { Aviso } from '@/shared/ui/Aviso'
@@ -95,13 +95,7 @@ export function ModalEditarVehiculo({
       },
       onError: (error) => {
         // Un 400 del backend vuelve a los campos; el resto queda en el banner de arriba.
-        const errores = resolveApiFieldErrors(parseApiError(error), t)
-        for (const [campo, mensaje] of Object.entries(errores)) {
-          form.setError(campo as keyof EditarVehiculoFormulario, {
-            type: TIPO_ERROR_SERVIDOR,
-            message: mensaje,
-          })
-        }
+        aplicarErroresDeCampo(form, error, t, { tipo: TIPO_ERROR_SERVIDOR })
       },
     })
   })

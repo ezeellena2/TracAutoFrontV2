@@ -20,7 +20,7 @@ export interface ApiError {
   validationErrors: Record<string, ApiValidationError[]> | null
 }
 
-type TranslationFn = (key: string, options?: Record<string, unknown>) => string
+export type TranslationFn = (key: string, options?: Record<string, unknown>) => string
 type JsonRecord = Record<string, unknown>
 
 /**

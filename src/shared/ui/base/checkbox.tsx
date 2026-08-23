@@ -1,3 +1,27 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+ * EDITADO RESPECTO DEL UPSTREAM DE shadcn/ui — declarado acá para que la
+ * próxima re-copia (`shadcn add checkbox --overwrite`) sea un diff legible y no
+ * una arqueología (02-primitivas.md §1.6 y §13).
+ *
+ * NO se cambió nada del upstream. Este encabezado existe para dejar escrito un
+ * PENDIENTE que si no queda acá, se vuelve a descubrir desde cero:
+ *
+ * ⚠️ `rounded-‹4px›` es geometría de marca hardcodeada, y **no se pudo
+ *   tokenizar** en F-04a: la escala semántica de radios arranca en
+ *   `--s-radio-sm` = 0.5rem = **8px** (`semanticas.css:131`). Sobre un checkbox
+ *   de 16px (`size-4`), pasar de 4px a 8px es duplicar el redondeo: se ve, y
+ *   sería un cambio de diseño disfrazado de refactor.
+ *
+ *   La regla del repo es explícita sobre qué hacer acá: *"si necesitás un token
+ *   que no existe, no lo inventes en el componente: pedilo"*
+ *   (`frontend-core.md` §1, procedimiento en `01-sistema-de-diseno.md` §10).
+ *
+ *   PENDIENTE (DA-FE-xx): falta un escalón de radio por debajo de `sm` (~4px)
+ *   para controles chicos. Lo necesitan `checkbox` (4px) y la flecha de
+ *   `tooltip` (2px). Decide arquitectura de frontend; pedir el id en
+ *   `DECISIONES.md`.
+ * ───────────────────────────────────────────────────────────────────────────── */
+
 "use client"
 
 import { Checkbox as CheckboxPrimitive } from "@base-ui/react/checkbox"

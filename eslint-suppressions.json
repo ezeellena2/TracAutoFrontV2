@@ -1,12 +1,53 @@
 {
   "src/app/bootstrap/AppBootstrap.tsx": {
+    "no-restricted-imports": {
+      "count": 4
+    },
     "orbi/sin-clase-arbitraria-de-color": {
       "count": 1
     }
   },
+  "src/app/registry/registry.test.ts": {
+    "no-restricted-imports": {
+      "count": 1
+    }
+  },
+  "src/features/access/pages/AceptarInvitacionPage.tsx": {
+    "no-restricted-imports": {
+      "count": 1
+    }
+  },
   "src/features/access/pages/LoginPage.tsx": {
+    "no-restricted-imports": {
+      "count": 1
+    },
     "orbi/sin-color-literal": {
       "count": 4
+    }
+  },
+  "src/features/access/pages/RestablecerPasswordPage.tsx": {
+    "no-restricted-imports": {
+      "count": 1
+    }
+  },
+  "src/features/access/pages/SolicitarRecuperacionPage.tsx": {
+    "no-restricted-imports": {
+      "count": 2
+    }
+  },
+  "src/features/access/pages/registro-empresa/ModuleCard.tsx": {
+    "no-restricted-imports": {
+      "count": 1
+    }
+  },
+  "src/features/access/pages/registro-empresa/RegistroEmpresaSuccess.tsx": {
+    "no-restricted-imports": {
+      "count": 1
+    }
+  },
+  "src/features/access/pages/registro/RegistroStepSuccess.tsx": {
+    "no-restricted-imports": {
+      "count": 1
     }
   },
   "src/features/access/schemas/aceptar-invitacion-schema.ts": {
@@ -34,6 +75,11 @@
       "count": 1
     }
   },
+  "src/features/context/pages/ContextSelectorPage.tsx": {
+    "no-restricted-imports": {
+      "count": 3
+    }
+  },
   "src/features/landing/components/LandingB2C.tsx": {
     "orbi/sin-color-literal": {
       "count": 2
@@ -52,6 +98,381 @@
       "count": 6
     }
   },
+  "src/features/landing/components/LandingNavbar.tsx": {
+    "no-restricted-imports": {
+      "count": 2
+    }
+  },
+  "src/features/landing/components/LandingPricing.tsx": {
+    "no-restricted-imports": {
+      "count": 1
+    }
+  },
+  "src/features/landing/components/LandingThemeSwitcher.tsx": {
+    "no-restricted-imports": {
+      "count": 2
+    }
+  },
+  "src/features/shell/components/AppHeader.tsx": {
+    "no-restricted-imports": {
+      "count": 3
+    }
+  },
+  "src/features/shell/components/dashboard/DashboardHasData.tsx": {
+    "no-restricted-imports": {
+      "count": 4
+    }
+  },
+  "src/features/shell/components/sidebar/OrgSwitcher.tsx": {
+    "no-restricted-imports": {
+      "count": 2
+    }
+  },
+  "src/features/shell/components/sidebar/SidebarFooter.tsx": {
+    "no-restricted-imports": {
+      "count": 1
+    }
+  },
+  "src/features/shell/components/sidebar/SidebarHeader.tsx": {
+    "no-restricted-imports": {
+      "count": 2
+    }
+  },
+  "src/features/shell/module-nav/registro.ts": {
+    "no-restricted-imports": {
+      "count": 9
+    }
+  },
+  "src/features/shell/nav-config.ts": {
+    "no-restricted-imports": {
+      "count": 2
+    }
+  },
+  "src/modules/flota/components/AvisoCamposNoBorrables.tsx": {
+    "no-restricted-imports": {
+      "count": 1
+    }
+  },
+  "src/modules/flota/components/AvisoDatosDeConexion.tsx": {
+    "no-restricted-imports": {
+      "count": 1
+    }
+  },
+  "src/modules/flota/components/centro/SubmenuDelCentro.tsx": {
+    "no-restricted-imports": {
+      "count": 5
+    }
+  },
+  "src/modules/flota/components/centro/integraciones/CardFirmaHmac.tsx": {
+    "no-restricted-imports": {
+      "count": 2
+    }
+  },
+  "src/modules/flota/components/centro/integraciones/FiltrosDeWebhooks.tsx": {
+    "no-restricted-imports": {
+      "count": 1
+    }
+  },
+  "src/modules/flota/components/centro/integraciones/ListaDeWebhooks.tsx": {
+    "no-restricted-imports": {
+      "count": 7
+    }
+  },
+  "src/modules/flota/components/centro/integraciones/ModalSecretoWebhook.tsx": {
+    "no-restricted-imports": {
+      "count": 2
+    }
+  },
+  "src/modules/flota/components/centro/integraciones/ModalWebhook.tsx": {
+    "no-restricted-imports": {
+      "count": 1
+    }
+  },
+  "src/modules/flota/components/centro/kanban/CardDeProblema.tsx": {
+    "no-restricted-imports": {
+      "count": 1
+    }
+  },
+  "src/modules/flota/components/centro/kanban/VistaKanban.tsx": {
+    "no-restricted-imports": {
+      "count": 2
+    }
+  },
+  "src/modules/flota/components/centro/reglas/EditorDeCondicion.tsx": {
+    "no-restricted-imports": {
+      "count": 2
+    }
+  },
+  "src/modules/flota/components/centro/reglas/ModalRegla.tsx": {
+    "no-restricted-imports": {
+      "count": 1
+    }
+  },
+  "src/modules/flota/components/centro/reglas/TablaDeReglas.tsx": {
+    "no-restricted-imports": {
+      "count": 7
+    }
+  },
+  "src/modules/flota/components/centro/sala/PanelDetalleProblema.tsx": {
+    "no-restricted-imports": {
+      "count": 2
+    }
+  },
+  "src/modules/flota/components/centro/sala/VistaSala.tsx": {
+    "no-restricted-imports": {
+      "count": 1
+    }
+  },
+  "src/modules/flota/components/centro/ticket/TabIntegracionesTicket.tsx": {
+    "no-restricted-imports": {
+      "count": 1
+    }
+  },
+  "src/modules/flota/components/centro/ticket/TabReglaTicket.tsx": {
+    "no-restricted-imports": {
+      "count": 1
+    }
+  },
+  "src/modules/flota/components/centro/ticket/TabResumenTicket.tsx": {
+    "no-restricted-imports": {
+      "count": 1
+    }
+  },
+  "src/modules/flota/components/centro/ticket/TabTimelineTicket.tsx": {
+    "no-restricted-imports": {
+      "count": 2
+    }
+  },
+  "src/modules/flota/components/centro/ticket/VistaTicket.tsx": {
+    "no-restricted-imports": {
+      "count": 1
+    }
+  },
+  "src/modules/flota/components/centro/timeline/VistaTimeline.tsx": {
+    "no-restricted-imports": {
+      "count": 1
+    }
+  },
+  "src/modules/flota/components/conductores/ConductorRow.tsx": {
+    "no-restricted-imports": {
+      "count": 10
+    }
+  },
+  "src/modules/flota/components/conductores/ModalEditarConductor.tsx": {
+    "no-restricted-imports": {
+      "count": 1
+    }
+  },
+  "src/modules/flota/components/conductores/SelectorConductor.tsx": {
+    "no-restricted-imports": {
+      "count": 1
+    }
+  },
+  "src/modules/flota/components/conductores/SelectorVehiculo.tsx": {
+    "no-restricted-imports": {
+      "count": 1
+    }
+  },
+  "src/modules/flota/components/conductores/detalle/HeroConductor.tsx": {
+    "no-restricted-imports": {
+      "count": 9
+    }
+  },
+  "src/modules/flota/components/conductores/detalle/MiniStatsConductor.tsx": {
+    "no-restricted-imports": {
+      "count": 4
+    }
+  },
+  "src/modules/flota/components/conductores/detalle/TabAsignacionesConductor.tsx": {
+    "no-restricted-imports": {
+      "count": 2
+    }
+  },
+  "src/modules/flota/components/conductores/detalle/TabDocumentosConductor.tsx": {
+    "no-restricted-imports": {
+      "count": 3
+    }
+  },
+  "src/modules/flota/components/conductores/detalle/TabInfoConductor.tsx": {
+    "no-restricted-imports": {
+      "count": 2
+    }
+  },
+  "src/modules/flota/components/detalle/AccionesVehiculo.tsx": {
+    "no-restricted-imports": {
+      "count": 6
+    }
+  },
+  "src/modules/flota/components/detalle/HeroVehiculo.tsx": {
+    "no-restricted-imports": {
+      "count": 2
+    }
+  },
+  "src/modules/flota/components/detalle/ModalEditarVehiculo.tsx": {
+    "no-restricted-imports": {
+      "count": 1
+    }
+  },
+  "src/modules/flota/components/detalle/TabConductor.tsx": {
+    "no-restricted-imports": {
+      "count": 3
+    }
+  },
+  "src/modules/flota/components/detalle/TabDispositivo.tsx": {
+    "no-restricted-imports": {
+      "count": 3
+    }
+  },
+  "src/modules/flota/components/detalle/TabHistorial.tsx": {
+    "no-restricted-imports": {
+      "count": 1
+    }
+  },
+  "src/modules/flota/components/detalle/TabInfoGeneral.tsx": {
+    "no-restricted-imports": {
+      "count": 1
+    }
+  },
+  "src/modules/flota/components/dispositivos/DispositivoRow.tsx": {
+    "no-restricted-imports": {
+      "count": 6
+    }
+  },
+  "src/modules/flota/components/dispositivos/ModalEditarDispositivo.tsx": {
+    "no-restricted-imports": {
+      "count": 1
+    }
+  },
+  "src/modules/flota/components/dispositivos/SelectorCatalogoGrowable.tsx": {
+    "no-restricted-imports": {
+      "count": 1
+    }
+  },
+  "src/modules/flota/components/dispositivos/SelectorDispositivoEnStock.tsx": {
+    "no-restricted-imports": {
+      "count": 1
+    }
+  },
+  "src/modules/flota/components/dispositivos/detalle/AccionesDispositivo.tsx": {
+    "no-restricted-imports": {
+      "count": 6
+    }
+  },
+  "src/modules/flota/components/dispositivos/detalle/HeroDispositivo.tsx": {
+    "no-restricted-imports": {
+      "count": 2
+    }
+  },
+  "src/modules/flota/components/dispositivos/detalle/TabHistorialStock.tsx": {
+    "no-restricted-imports": {
+      "count": 2
+    }
+  },
+  "src/modules/flota/components/dispositivos/detalle/TabInfoDispositivo.tsx": {
+    "no-restricted-imports": {
+      "count": 1
+    }
+  },
+  "src/modules/flota/components/dispositivos/detalle/TabTelemetriaDispositivo.tsx": {
+    "no-restricted-imports": {
+      "count": 1
+    }
+  },
+  "src/modules/flota/components/mapa/MapaPanelDetalle.tsx": {
+    "no-restricted-imports": {
+      "count": 2
+    }
+  },
+  "src/modules/flota/components/mapa/MapaPanelLateral.tsx": {
+    "no-restricted-imports": {
+      "count": 4
+    }
+  },
+  "src/modules/flota/components/onboarding/AltCtaImportarCsv.tsx": {
+    "no-restricted-imports": {
+      "count": 1
+    }
+  },
+  "src/modules/flota/components/onboarding/PasoConductor.tsx": {
+    "no-restricted-imports": {
+      "count": 2
+    }
+  },
+  "src/modules/flota/components/onboarding/PasoDispositivo.tsx": {
+    "no-restricted-imports": {
+      "count": 1
+    }
+  },
+  "src/modules/flota/components/senales/AvisoDeSenales.tsx": {
+    "no-restricted-imports": {
+      "count": 1
+    }
+  },
+  "src/modules/flota/components/vehiculos/VehiculoRow.tsx": {
+    "no-restricted-imports": {
+      "count": 3
+    }
+  },
+  "src/modules/flota/modulo.manifest.ts": {
+    "no-restricted-imports": {
+      "count": 6
+    }
+  },
+  "src/modules/flota/pages/ConductorDetallePage.tsx": {
+    "no-restricted-imports": {
+      "count": 3
+    }
+  },
+  "src/modules/flota/pages/ConductoresListPage.tsx": {
+    "no-restricted-imports": {
+      "count": 3
+    }
+  },
+  "src/modules/flota/pages/DispositivoDetallePage.tsx": {
+    "no-restricted-imports": {
+      "count": 3
+    }
+  },
+  "src/modules/flota/pages/DispositivosListPage.tsx": {
+    "no-restricted-imports": {
+      "count": 3
+    }
+  },
+  "src/modules/flota/pages/FlotaIntegracionesPage.tsx": {
+    "no-restricted-imports": {
+      "count": 3
+    }
+  },
+  "src/modules/flota/pages/MapaEnVivoPage.tsx": {
+    "no-restricted-imports": {
+      "count": 2
+    }
+  },
+  "src/modules/flota/pages/OnboardingFlotaPage.tsx": {
+    "no-restricted-imports": {
+      "count": 1
+    }
+  },
+  "src/modules/flota/pages/ReglasProblemasPage.tsx": {
+    "no-restricted-imports": {
+      "count": 2
+    }
+  },
+  "src/modules/flota/pages/VehiculoDetallePage.tsx": {
+    "no-restricted-imports": {
+      "count": 2
+    }
+  },
+  "src/modules/flota/pages/VehiculosListPage.tsx": {
+    "no-restricted-imports": {
+      "count": 3
+    }
+  },
+  "src/shared/errors/ErrorFallback.tsx": {
+    "no-restricted-imports": {
+      "count": 1
+    }
+  },
   "src/shared/errors/parse-api-error.ts": {
     "no-restricted-imports": {
       "count": 1
@@ -60,6 +481,111 @@
   "src/shared/hooks/useMultiStepUrl.ts": {
     "react-hooks/refs": {
       "count": 3
+    }
+  },
+  "src/shared/patrones/mapa/ControlesDelMapa.tsx": {
+    "no-restricted-imports": {
+      "count": 5
+    }
+  },
+  "src/shared/ui/Avatar.stories.tsx": {
+    "no-restricted-imports": {
+      "count": 1
+    }
+  },
+  "src/shared/ui/Badge.stories.tsx": {
+    "no-restricted-imports": {
+      "count": 1
+    }
+  },
+  "src/shared/ui/BarraDeFiltros.tsx": {
+    "no-restricted-imports": {
+      "count": 1
+    }
+  },
+  "src/shared/ui/BarraMasiva.stories.tsx": {
+    "no-restricted-imports": {
+      "count": 2
+    }
+  },
+  "src/shared/ui/Boton.stories.tsx": {
+    "no-restricted-imports": {
+      "count": 2
+    }
+  },
+  "src/shared/ui/BotonIcono.stories.tsx": {
+    "no-restricted-imports": {
+      "count": 3
+    }
+  },
+  "src/shared/ui/Card.stories.tsx": {
+    "no-restricted-imports": {
+      "count": 1
+    }
+  },
+  "src/shared/ui/ColumnaLateral.tsx": {
+    "no-restricted-imports": {
+      "count": 1
+    }
+  },
+  "src/shared/ui/EstadoVacio.stories.tsx": {
+    "no-restricted-imports": {
+      "count": 2
+    }
+  },
+  "src/shared/ui/EtiquetaOrden.tsx": {
+    "no-restricted-imports": {
+      "count": 3
+    }
+  },
+  "src/shared/ui/Icono.stories.tsx": {
+    "no-restricted-imports": {
+      "count": 1
+    }
+  },
+  "src/shared/ui/Input.stories.tsx": {
+    "no-restricted-imports": {
+      "count": 2
+    }
+  },
+  "src/shared/ui/MenuAcciones.stories.tsx": {
+    "no-restricted-imports": {
+      "count": 4
+    }
+  },
+  "src/shared/ui/Paginacion.tsx": {
+    "no-restricted-imports": {
+      "count": 2
+    }
+  },
+  "src/shared/ui/Stepper.tsx": {
+    "no-restricted-imports": {
+      "count": 2
+    }
+  },
+  "src/shared/ui/Tabla.stories.tsx": {
+    "no-restricted-imports": {
+      "count": 2
+    }
+  },
+  "src/shared/ui/Tooltip.stories.tsx": {
+    "no-restricted-imports": {
+      "count": 1
+    }
+  },
+  "src/shared/ui/legacy/Input.stories.tsx": {
+    "no-restricted-imports": {
+      "count": 1
+    }
+  },
+  "src/shared/ui/legacy/Input.tsx": {
+    "no-restricted-imports": {
+      "count": 2
+    }
+  },
+  "src/shared/ui/legacy/ThemeSwitcher.tsx": {
+    "no-restricted-imports": {
+      "count": 2
     }
   },
   "src/shared/ui/legacy/TracAutoMark.tsx": {

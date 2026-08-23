@@ -124,6 +124,84 @@ jobs:
       - name: Build de Storybook
         run: npm run build-storybook
 
+  # ═════════════════════════════════════════════════════════════════════════
+  # REGRESIÓN VISUAL — la única verificación que mira el PIXEL
+  #
+  # QUÉ DETECTA. Chromatic renderiza las 173 stories de `src/**/*.stories.tsx`
+  # y las compara contra la última versión aprobada. Si un componente cambia de
+  # radio, de alto, de color o de espaciado, aparece como diff y hay que
+  # aprobarlo a mano. Es lo que convierte "toqué un token" en un hecho visible.
+  #
+  # QUÉ **NO** DETECTA, y esto importa tanto como lo anterior:
+  #   · una pantalla SIN story — hoy `src/features/` y `src/modules/` no tienen
+  #     ninguna, así que las 16 pantallas reales quedan afuera por completo;
+  #   · una composición: verifica primitivas aisladas, no cómo se ven juntas;
+  #   · cualquier cosa detrás de un estado que la story no monta.
+  # O sea: es una red sobre `shared/ui/`, no sobre el producto. Leerlo como
+  # "el front está cubierto visualmente" sería exactamente el falso verde que
+  # el encabezado de este archivo documenta.
+  #
+  # POR QUÉ ES UN JOB SEPARADO. Manda a un servicio externo y depende de un
+  # secret: si fallara adentro de `verificacion`, tiraría abajo tipos, lint y
+  # tests por una causa que no tiene nada que ver con el código.
+  # ═════════════════════════════════════════════════════════════════════════
+  regresion-visual:
+    name: Regresión visual (Chromatic)
+    runs-on: ubuntu-latest
+
+    env:
+      CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+
+    steps:
+      # ⚠️ `fetch-depth: 0` NO es opcional. Chromatic ubica la línea base
+      # caminando el historial de git; con el clon superficial que trae el
+      # default (depth 1) no encuentra el commit anterior y trata TODA story
+      # como nueva.
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      # El secret no se puede leer desde un `if:` de job — el contexto
+      # `secrets` no existe ahí — pero sí desde un `if:` de step vía `env`.
+      # Por eso el guardado se hace acá y no arriba.
+      - name: ¿Está el token?
+        id: token
+        run: |
+          if [ -z "$CHROMATIC_PROJECT_TOKEN" ]; then
+            echo "hay=no" >> "$GITHUB_OUTPUT"
+          else
+            echo "hay=si" >> "$GITHUB_OUTPUT"
+          fi
+
+      # Un skip que se ve. Sin este paso el job pasaría en verde sin haber
+      # comparado nada, que es la falla que este workflow ya sufrió una vez.
+      - name: SIN COBERTURA VISUAL — falta el secret
+        if: steps.token.outputs.hay == 'no'
+        run: |
+          echo "::warning title=Chromatic sin configurar::No hay CHROMATIC_PROJECT_TOKEN en los secrets del repo. Este job NO comparó ninguna story: no hay regresión visual verificada en este commit."
+          echo "Para activarlo: Settings > Secrets and variables > Actions > New repository secret, con el token del proyecto de chromatic.com."
+
+      - name: Instalar dependencias
+        if: steps.token.outputs.hay == 'si'
+        run: npm ci
+
+      # Sin `--exit-zero-on-changes` a propósito: un cambio visual no aprobado
+      # tiene que poner el job en ROJO. Aprobarlo (y con eso mover la línea
+      # base) se hace en la UI de Chromatic, que es donde se ve el antes y el
+      # después. Un job que reporta el diff y sigue en verde no es una red.
+      - name: Publicar y comparar las stories
+        if: steps.token.outputs.hay == 'si'
+        # Comparación COMPLETA de las 173 stories, sin `--only-changed`:
+        # TurboSnap necesita que el build de Storybook emita `stats.json`
+        # (`--stats-json`), que este proyecto no genera. Activarlo sin eso
+        # rompe el job o cae igual al snapshot completo, en silencio.
+        run: npx chromatic --project-token="$CHROMATIC_PROJECT_TOKEN"
+
 # El e2e de Playwright NO entra en el CI de PR: necesita la app levantada y el
 # backend. Va en un workflow aparte, contra un entorno desplegado
 # (`06-capa-0-frontend.md` §3.2).

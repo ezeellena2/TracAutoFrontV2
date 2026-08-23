@@ -1,3 +1,20 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+ * EDITADO RESPECTO DEL UPSTREAM DE shadcn/ui — declarado acá para que la
+ * próxima re-copia (`shadcn add tooltip --overwrite`) sea un diff legible y no
+ * una arqueología (02-primitivas.md §1.6 y §13).
+ *
+ * NO se cambió nada del upstream. Este encabezado deja escritas dos cosas que
+ * se miraron en F-04a y se decidió NO tocar:
+ *
+ * ⚠️ `rounded-‹2px›` en la FLECHA: mismo caso que `checkbox.tsx` — el escalón
+ *   más chico de la escala es 8px, y sobre una flecha de 10px (`size-2.5`)
+ *   convertiría la punta en una gota. Mismo PENDIENTE (DA-FE-xx) que checkbox.
+ *
+ *   `translate-y-‹calc(-50%-2px)›`: NO es geometría de marca, es el cálculo que
+ *   pega la flecha al globo tapando la costura de 1px. Una estética no debería
+ *   poder moverlo: eso sería reestructurar, no re-pintar. Se deja a propósito.
+ * ───────────────────────────────────────────────────────────────────────────── */
+
 import { Tooltip as TooltipPrimitive } from "@base-ui/react/tooltip"
 
 import { cn } from "@/shared/utils/cn"

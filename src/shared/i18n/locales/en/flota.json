@@ -347,6 +347,7 @@
       "vacio": "Catalog has no options",
       "fallo": "The catalog could not be loaded. Try again in a few seconds.",
       "marcasVacias": "The make catalog is still empty: no makes have been loaded into the platform.",
+      "marcaTextoLibre": "The make catalog is still empty: type it as it appears on the registration.",
       "tiposVacios": "The vehicle type catalog is still empty.",
       "modelosVacios": "This make has no models loaded in the catalog yet.",
       "modeloTextoLibre": "The catalog has no models for this make yet: type it as it appears on the registration.",

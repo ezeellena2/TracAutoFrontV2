@@ -347,6 +347,7 @@
       "vacio": "Catálogo sin opciones",
       "fallo": "No se pudo cargar el catálogo. Volvé a intentarlo en unos segundos.",
       "marcasVacias": "El catálogo de marcas todavía está vacío: no se cargaron las marcas en la plataforma.",
+      "marcaTextoLibre": "El catálogo de marcas todavía está vacío: escribila como figura en la cédula.",
       "tiposVacios": "El catálogo de tipos de vehículo todavía está vacío.",
       "modelosVacios": "Esta marca todavía no tiene modelos cargados en el catálogo.",
       "modeloTextoLibre": "El catálogo todavía no tiene modelos de esta marca: escribilo como figura en la cédula.",

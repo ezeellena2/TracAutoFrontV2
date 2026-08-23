@@ -1,6 +1,6 @@
-import { AlertTriangle, RefreshCw } from 'lucide-react'
 import { Boton } from '@/shared/ui/Boton'
 import { Icono } from '@/shared/ui/Icono'
+import { ICONOS } from '@/shared/ui/iconos'
 import { cn } from '@/shared/utils/cn'
 
 /**
@@ -56,7 +56,7 @@ export function EstadoError({
       {...resto}
     >
       <span className="flex size-12 items-center justify-center rounded-full bg-peligro-fondo text-peligro">
-        <Icono icono={AlertTriangle} tamano="lg" />
+        <Icono nombre="error" tamano="lg" />
       </span>
       <p className="text-lg font-semibold tracking-snug text-fg-primario">{titulo}</p>
       {mensaje ? <p className="max-w-md text-sm text-fg-secundario">{mensaje}</p> : null}
@@ -64,7 +64,7 @@ export function EstadoError({
         <p className="font-mono text-xs tracking-wide text-fg-terciario select-all">{trazaId}</p>
       ) : null}
       {variante === 'recuperable' && onReintentar ? (
-        <Boton variante="secundaria" tamano="sm" iconoIzq={RefreshCw} onClick={onReintentar}>
+        <Boton variante="secundaria" tamano="sm" iconoIzq={ICONOS.reintentar} onClick={onReintentar}>
           {textoReintentar}
         </Boton>
       ) : null}

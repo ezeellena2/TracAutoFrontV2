@@ -1,4 +1,3 @@
-import { ExternalLink } from 'lucide-react'
 import { cva, type VariantProps } from 'class-variance-authority'
 import { Icono } from '@/shared/ui/Icono'
 import { cn } from '@/shared/utils/cn'
@@ -62,7 +61,7 @@ export function Enlace({
       {children}
       {externo ? (
         <>
-          <Icono icono={ExternalLink} tamano="xs" />
+          <Icono nombre="abrir-afuera" tamano="xs" />
           <span className="sr-only">{etiquetaExterno}</span>
         </>
       ) : null}

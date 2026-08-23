@@ -1,5 +1,4 @@
 import type { ReactNode } from 'react'
-import { AlertTriangle } from 'lucide-react'
 import { Icono } from '@/shared/ui/Icono'
 import { cn } from '@/shared/utils/cn'
 
@@ -58,7 +57,7 @@ export function Aviso({
       )}
     >
       <p className="flex items-center gap-2 text-sm font-medium text-fg-primario">
-        <Icono icono={AlertTriangle} tamano="sm" />
+        <Icono nombre="advertencia" tamano="sm" />
         {titulo}
       </p>
       {mensaje ? <p className="text-sm text-fg-secundario">{mensaje}</p> : null}

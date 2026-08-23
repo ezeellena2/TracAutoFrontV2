@@ -13,8 +13,8 @@ import {
   hasApiFieldErrors,
   parseApiError,
   resolveApiErrorMessage,
-  resolveApiFieldErrors,
 } from '@/shared/errors/parse-api-error'
+import { aplicarErroresDeCampo } from '@/shared/forms/aplicar-errores-de-campo'
 import type { ConductorDetalleDto } from '@/services/contracts/flota'
 import { AvisoCamposNoBorrables } from '../AvisoCamposNoBorrables'
 import { Aviso } from '@/shared/ui/Aviso'
@@ -156,13 +156,7 @@ function Formulario({
         onCerrar()
       },
       onError: (error) => {
-        const errores = resolveApiFieldErrors(parseApiError(error), t)
-        for (const [campo, mensaje] of Object.entries(errores)) {
-          form.setError(campo as keyof EditarConductorFormulario, {
-            type: TIPO_ERROR_SERVIDOR,
-            message: mensaje,
-          })
-        }
+        aplicarErroresDeCampo(form, error, t, { tipo: TIPO_ERROR_SERVIDOR })
       },
     })
   })
