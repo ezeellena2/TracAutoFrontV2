@@ -22,6 +22,8 @@ import { RestablecerPasswordPage } from '@/features/access/pages/RestablecerPass
 // Pages — app (protegidas)
 import { DashboardPage } from '@/features/shell/pages/DashboardPage'
 import { ContextSelectorPage } from '@/features/context/pages/ContextSelectorPage'
+import { ModulosPage } from '@/features/configuracion/pages/ModulosPage'
+import { RequierePermiso } from '@/shared/auth/permissions/RequierePermiso'
 
 // Modulos de negocio — NO se importan de a uno: los descubre el agregador (F-03).
 import { MANIFIESTOS } from '@/app/registry'
@@ -108,7 +110,22 @@ export function AppRouter() {
 
           {/* Configuracion */}
           <Route path="configuracion/empresa" element={<AppComingSoonPage />} />
-          <Route path="configuracion/modulos" element={<AppComingSoonPage />} />
+          {/* Se cambia el `element` de la línea que YA existía: `configuracion/modulos` y
+              `configuracion/facturacion` son rutas HERMANAS, no una sub-pestaña de la otra.
+              Configuración no tiene —ni debe tener— un `ConfiguracionRoutes`: sus secciones son
+              rutas sueltas acá, y por eso tampoco lleva manifiesto de módulo.
+
+              Va envuelta en `RequierePermiso` y no en `RequiereModulo`: Configuración es superficie
+              de sistema. Gatearla por módulo activo expulsaría de la pantalla justo a quien tiene
+              un módulo suspendido — que es el único que la necesita (`D-GM-13`). */}
+          <Route
+            path="configuracion/modulos"
+            element={
+              <RequierePermiso permiso="sistema.modulos.leer">
+                <ModulosPage />
+              </RequierePermiso>
+            }
+          />
           <Route path="configuracion/facturacion" element={<AppComingSoonPage />} />
           <Route path="configuracion/notificaciones" element={<AppComingSoonPage />} />
           <Route path="configuracion/integraciones" element={<AppComingSoonPage />} />

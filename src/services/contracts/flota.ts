@@ -46,36 +46,19 @@
  * PROHIBIDOS `PaginatedResponse` y `BaseListFilters` (B-17).
  * ========================================================================== */
 
-export type SortDirection = 'Asc' | 'Desc'
 
-export interface PageQuery {
-  page?: number // default 1; < 1 se normaliza a 1
-  pageSize?: number // default 20; < 1 -> 20, > 100 -> 100
-}
+/* Paginacion: se EXTRAJO a `./paginacion` el 2026-08-23, al aparecer el segundo consumidor
+ * (gestion de modulos). Se importa Y se re-exporta: el import es para los ~7 usos internos de este
+ * mismo archivo, el re-export para que ningun consumidor existente se entere de la mudanza. */
+import type { PageQuery, SortedPageQuery } from './paginacion'
 
-export interface SortedPageQuery<TSortBy extends string> extends PageQuery {
-  sortBy?: TSortBy // enum PROPIO por endpoint
-  sortDirection?: SortDirection // default 'Desc'
-}
-
-export interface PaginationMetadata {
-  page: number
-  pageSize: number
-  itemCount: number
-  totalItems: number
-  totalPages: number
-  hasPreviousPage: boolean
-  hasNextPage: boolean
-  // DRIFT: `dtos.ts` los declara `number`. `PaginationMetadata` de Platform.Pagination los emite
-  // `long?` y son null cuando la pagina no trae items.
-  fromItem: number | null
-  toItem: number | null
-}
-
-export interface PagedResult<T> {
-  items: T[]
-  pagination: PaginationMetadata
-}
+export type {
+  SortDirection,
+  PageQuery,
+  SortedPageQuery,
+  PaginationMetadata,
+  PagedResult,
+} from './paginacion'
 
 /* ============================================================================
  * 2. VOCABULARIOS COMPARTIDOS (catalogos DB, codigos snake_case — D-7)

@@ -751,6 +751,22 @@
       "title": "Something went wrong",
       "message": "An unexpected error occurred. You can try again.",
       "retry": "Retry"
+    },
+    "modulos": {
+      "catalogo": {
+        "no_encontrado": "That module does not exist in the catalog.",
+        "no_suscribible": "That module cannot be subscribed to: it is included with the platform.",
+        "es_base": "That module is the platform base: it cannot be cancelled."
+      },
+      "suscripcion": {
+        "no_encontrada": "Your organization does not have that module.",
+        "transicion_invalida": "That change is not allowed from the module's current state.",
+        "dependencia_faltante": "This module requires others that you do not have active yet.",
+        "tiene_dependientes": "Cannot deactivate: other modules depend on this one."
+      },
+      "dependencias": {
+        "ciclo_detectado": "That dependency would create a cycle between modules."
+      }
     }
   },
   "context": {
@@ -853,6 +869,119 @@
       "centrarSinPosiciones": "No positions to center on",
       "pantallaCompleta": "Fullscreen",
       "salirPantallaCompleta": "Exit fullscreen"
+    }
+  },
+  "configuracion": {
+    "modulos": {
+      "titulo": "Modules",
+      "bajada": "Which modules your organization has, and in what state.",
+      "estadoFuncional": {
+        "activa": "Active",
+        "dada_de_baja": "Cancelled"
+      },
+      "estadoComercial": {
+        "trial": "Trial",
+        "al_dia": "Paid",
+        "suspendida": "Suspended"
+      },
+      "ayudaEstadoComercial": {
+        "trial": "You are using this module during a trial period.",
+        "al_dia": "This module is paid up.",
+        "suspendida": "You have it, but your team cannot use it until payment is settled. This is not the same as not having it."
+      },
+      "acceso": {
+        "conAcceso": "Your team can use it",
+        "enPrueba": "Your team can use it. Trial until {{fecha}}",
+        "sinAccesoPorSuspension": "Subscribed, but no access until settled",
+        "noContratado": "You have not subscribed to it",
+        "dadoDeBaja": "You cancelled this module"
+      },
+      "situacion": {
+        "no_contratado": "Not subscribed",
+        "activo": "Active",
+        "en_prueba": "Trial",
+        "suspendido": "Suspended",
+        "dado_de_baja": "Cancelled"
+      },
+      "acciones": {
+        "contratar": "Subscribe",
+        "recontratar": "Subscribe again",
+        "suspender": "Suspend",
+        "regularizar": "Settle",
+        "darDeBaja": "Cancel",
+        "verHistorial": "View history",
+        "cancelar": "Cancel",
+        "cerrar": "Close"
+      },
+      "meta": {
+        "dependeDe": "Requires",
+        "esBase": "Base module",
+        "vencimiento": "Expires on {{fecha}}",
+        "sinVencimiento": "No expiry"
+      },
+      "contratar": {
+        "titulo": "Subscribe to {{modulo}}",
+        "descripcion": "Your team will be able to use this module as soon as you confirm.",
+        "conDependencias": "{{modulo}} requires other modules that you do not have yet.",
+        "listaDependencias": "Missing:",
+        "optIn": "Also activate those modules",
+        "optInAyuda": "Without this, the operation is rejected and nothing is activated.",
+        "confirmar": "Subscribe",
+        "noDaPermisos": "Subscribing to a module does not grant anyone permissions: it lets you assign them to a role."
+      },
+      "suspender": {
+        "titulo": "Suspend {{modulo}}",
+        "descripcion": "Your team loses access, but the module stays subscribed and roles are untouched. Settling restores access automatically.",
+        "motivo": "Reason (optional)",
+        "motivoAyuda": "Recorded in the history. It is the only thing that will explain later why access was cut.",
+        "confirmar": "Suspend"
+      },
+      "regularizar": {
+        "titulo": "Settle {{modulo}}",
+        "descripcion": "Access returns immediately. No permissions need reassigning: they were never removed.",
+        "motivo": "Reason (optional)",
+        "confirmar": "Settle"
+      },
+      "baja": {
+        "titulo": "Cancel {{modulo}}",
+        "advertencia1": "This module's permissions are removed from every role, including the roles you created.",
+        "advertencia2": "The removal is permanent: there is no trash bin.",
+        "advertencia3": "If you subscribe again, only the template roles are recreated. Permissions on your own roles must be reassigned by hand.",
+        "tipeaParaConfirmar": "Type the module code to confirm:",
+        "motivo": "Reason (optional)",
+        "bloqueadaPorDependientes": "First cancel the modules that depend on this one: {{dependientes}}",
+        "confirmacionInvalida": "The code does not match.",
+        "confirmar": "Cancel module"
+      },
+      "historial": {
+        "titulo": "History of {{modulo}}",
+        "eje": "Axis",
+        "ejeFuncional": "Subscription",
+        "ejeComercial": "Payment status",
+        "transicion": "Change",
+        "nacimiento": "Created",
+        "motivo": "Reason",
+        "sinMotivo": "No reason recorded",
+        "fecha": "Date",
+        "vacio": "No movements yet.",
+        "version": "Version",
+        "cargando": "Loading history…"
+      },
+      "vacio": {
+        "titulo": "No modules in the catalog",
+        "descripcion": "Once the platform publishes subscribable modules, they will show up here."
+      },
+      "sinPermiso": {
+        "titulo": "You do not have access to this screen",
+        "descripcion": "Ask an administrator of your organization for permission to view modules."
+      },
+      "error": {
+        "titulo": "We could not load the modules",
+        "reintentar": "Retry",
+        "sinConexion": "We could not reach the server. What you see may be out of date."
+      },
+      "pendienteFacturacion": "Module pricing and billing are not defined yet.",
+      "avisoTokenViejo": "The change is already saved. The menu and access update the next time your session refreshes, up to 15 minutes later."
     }
   }
 }

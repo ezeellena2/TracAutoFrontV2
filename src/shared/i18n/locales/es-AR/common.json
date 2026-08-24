@@ -751,6 +751,22 @@
       "title": "Algo salio mal",
       "message": "Ocurrio un error inesperado. Podes intentar de nuevo.",
       "retry": "Reintentar"
+    },
+    "modulos": {
+      "catalogo": {
+        "no_encontrado": "Ese módulo no existe en el catálogo.",
+        "no_suscribible": "Ese módulo no se contrata: viene incluido en la plataforma.",
+        "es_base": "Ese módulo es la base de la plataforma: no se puede dar de baja."
+      },
+      "suscripcion": {
+        "no_encontrada": "Tu organización no tiene ese módulo.",
+        "transicion_invalida": "No se puede hacer ese cambio desde el estado actual del módulo.",
+        "dependencia_faltante": "Este módulo necesita otros que todavía no tenés activos.",
+        "tiene_dependientes": "No se puede desactivar: hay otros módulos que dependen de este."
+      },
+      "dependencias": {
+        "ciclo_detectado": "Esa dependencia crearía un ciclo entre módulos."
+      }
     }
   },
   "context": {
@@ -853,6 +869,119 @@
       "centrarSinPosiciones": "No hay posiciones para centrar",
       "pantallaCompleta": "Pantalla completa",
       "salirPantallaCompleta": "Salir de pantalla completa"
+    }
+  },
+  "configuracion": {
+    "modulos": {
+      "titulo": "Módulos",
+      "bajada": "Qué módulos tiene contratados tu organización, y en qué estado.",
+      "estadoFuncional": {
+        "activa": "Activo",
+        "dada_de_baja": "Dado de baja"
+      },
+      "estadoComercial": {
+        "trial": "En prueba",
+        "al_dia": "Al día",
+        "suspendida": "Suspendido"
+      },
+      "ayudaEstadoComercial": {
+        "trial": "Estás usando este módulo en período de prueba.",
+        "al_dia": "El módulo está al día.",
+        "suspendida": "Lo tenés contratado, pero tu equipo no puede usarlo hasta que se regularice. No es lo mismo que no tenerlo."
+      },
+      "acceso": {
+        "conAcceso": "Tu equipo puede usarlo",
+        "enPrueba": "Tu equipo puede usarlo. Prueba hasta el {{fecha}}",
+        "sinAccesoPorSuspension": "Contratado, pero sin acceso hasta regularizar",
+        "noContratado": "No lo tenés contratado",
+        "dadoDeBaja": "Diste de baja este módulo"
+      },
+      "situacion": {
+        "no_contratado": "No contratado",
+        "activo": "Activo",
+        "en_prueba": "En prueba",
+        "suspendido": "Suspendido",
+        "dado_de_baja": "Dado de baja"
+      },
+      "acciones": {
+        "contratar": "Contratar",
+        "recontratar": "Volver a contratar",
+        "suspender": "Suspender",
+        "regularizar": "Regularizar",
+        "darDeBaja": "Dar de baja",
+        "verHistorial": "Ver historial",
+        "cancelar": "Cancelar",
+        "cerrar": "Cerrar"
+      },
+      "meta": {
+        "dependeDe": "Necesita",
+        "esBase": "Módulo base",
+        "vencimiento": "Vence el {{fecha}}",
+        "sinVencimiento": "Sin vencimiento"
+      },
+      "contratar": {
+        "titulo": "Contratar {{modulo}}",
+        "descripcion": "Tu equipo va a poder usar este módulo apenas confirmes.",
+        "conDependencias": "{{modulo}} necesita que estén activos otros módulos que hoy no tenés.",
+        "listaDependencias": "Faltan:",
+        "optIn": "Activar también esos módulos",
+        "optInAyuda": "Sin esto, la operación se rechaza y no se activa nada.",
+        "confirmar": "Contratar",
+        "noDaPermisos": "Contratar el módulo no le da permisos a nadie: habilita a que se los puedas asignar a un rol."
+      },
+      "suspender": {
+        "titulo": "Suspender {{modulo}}",
+        "descripcion": "Tu equipo deja de tener acceso, pero el módulo sigue contratado y los roles quedan intactos. Al regularizar, el acceso vuelve solo.",
+        "motivo": "Motivo (opcional)",
+        "motivoAyuda": "Queda registrado en el historial. Es lo único que va a explicar después por qué se cortó el acceso.",
+        "confirmar": "Suspender"
+      },
+      "regularizar": {
+        "titulo": "Regularizar {{modulo}}",
+        "descripcion": "El acceso vuelve de inmediato. No hay que reasignar permisos: nunca se borraron.",
+        "motivo": "Motivo (opcional)",
+        "confirmar": "Regularizar"
+      },
+      "baja": {
+        "titulo": "Dar de baja {{modulo}}",
+        "advertencia1": "Se borran los permisos de este módulo de todos los roles, incluidos los roles que creaste vos.",
+        "advertencia2": "El borrado es definitivo: no hay papelera.",
+        "advertencia3": "Si volvés a contratarlo se recrean solo los roles plantilla. Los permisos de tus roles propios hay que reasignarlos a mano.",
+        "tipeaParaConfirmar": "Escribí el código del módulo para confirmar:",
+        "motivo": "Motivo (opcional)",
+        "bloqueadaPorDependientes": "Primero dá de baja los módulos que dependen de este: {{dependientes}}",
+        "confirmacionInvalida": "El código no coincide.",
+        "confirmar": "Dar de baja"
+      },
+      "historial": {
+        "titulo": "Historial de {{modulo}}",
+        "eje": "Eje",
+        "ejeFuncional": "Contratación",
+        "ejeComercial": "Estado de pago",
+        "transicion": "Cambio",
+        "nacimiento": "Alta",
+        "motivo": "Motivo",
+        "sinMotivo": "Sin motivo registrado",
+        "fecha": "Fecha",
+        "vacio": "Todavía no hay movimientos.",
+        "version": "Versión",
+        "cargando": "Cargando el historial…"
+      },
+      "vacio": {
+        "titulo": "No hay módulos en el catálogo",
+        "descripcion": "Cuando la plataforma publique módulos contratables, van a aparecer acá."
+      },
+      "sinPermiso": {
+        "titulo": "No tenés acceso a esta pantalla",
+        "descripcion": "Pedile a un administrador de tu organización el permiso para ver los módulos."
+      },
+      "error": {
+        "titulo": "No pudimos cargar los módulos",
+        "reintentar": "Reintentar",
+        "sinConexion": "No pudimos contactar al servidor. Lo que ves puede estar desactualizado."
+      },
+      "pendienteFacturacion": "El precio y la facturación de los módulos todavía no están definidos.",
+      "avisoTokenViejo": "El cambio ya está guardado. El menú y los accesos se actualizan la próxima vez que se refresque tu sesión, hasta 15 minutos después."
     }
   }
 }

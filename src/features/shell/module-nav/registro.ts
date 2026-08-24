@@ -63,7 +63,13 @@ const CONFIGURACION: RegistroDeModulo = {
     {
       items: [
         { key: 'cfg.empresa', labelKey: 'shell.nav.confEmpresa', icono: Building2, ruta: '/app/configuracion/empresa' },
-        { key: 'cfg.modulos', labelKey: 'shell.nav.confModulos', icono: Blocks, ruta: '/app/configuracion/modulos' },
+        {
+          key: 'cfg.modulos',
+          labelKey: 'shell.nav.confModulos',
+          icono: Blocks,
+          ruta: '/app/configuracion/modulos',
+          permiso: 'sistema.modulos.leer',
+        },
         { key: 'cfg.facturacion', labelKey: 'shell.nav.confFacturacion', icono: CreditCard, ruta: '/app/configuracion/facturacion' },
         { key: 'cfg.notificaciones', labelKey: 'shell.nav.confNotificaciones', icono: Bell, ruta: '/app/configuracion/notificaciones' },
         {
